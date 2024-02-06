@@ -1,8 +1,8 @@
 export default {
-    providers: [
-      {
-        domain: "https://your-issuer-url.clerk.accounts.dev/",
-        applicationID: "convex",
-      },
-    ]
-  };
+  providers: [
+    {
+      domain: "https://knowing-monster-99.clerk.accounts.dev/",
+      applicationID: "convex",
+    },
+  ],
+};

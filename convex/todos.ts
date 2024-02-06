@@ -7,7 +7,8 @@ export const createTodo = mutation({
     },
     handler: async (ctx, args) => { 
         await ctx.db.insert("todos", {
-            text: args.text
+            text: args.text,
+            meta: 123
         })
     }
 })
