@@ -10,7 +10,7 @@ export default function useStoreUserEffect() {
   const { user } = useUser();
   // When this state is set we know the server
   // has stored the user.
-  const [userId, setUserId] = useState<Id<"users"> | null>(null);
+  const [userId, setUserId] = useState<Id<"user"> | null>(null);
   const storeUser = useMutation(api.user.store);
   // Call the `storeUser` mutation function to store
   // the current user in the `users` table and return the `Id` value.

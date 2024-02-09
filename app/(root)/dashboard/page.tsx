@@ -1,17 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { api } from "@/convex/_generated/api";
-import { useMutation, useQuery } from "convex/react";
+import { useQuery } from "convex/react";
+import useStoreUserEffect from "@/hooks/useStoreUser";
+import { Id } from "@/convex/_generated/dataModel";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const [text, setText] = useState("");
-  const createTodo = useMutation(api.todos.createTodo);
-  const todos = useQuery(api.todos.getTodos);
-
-  return (
-    <main>
-        Home
-    </main>
-  );
+  const router = useRouter();
+  const userId = useStoreUserEffect();
+  const user = useQuery(api.user.getSingleUser, {
+    userId: userId,
+  });
+  if (user?.onboarded == false) { 
+    router.push("/onboard")
+  }
+  return <main>Home</main>;
 }

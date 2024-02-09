@@ -9,24 +9,26 @@ import Link from "next/link";
 import Image from "next/image";
 export default function Home() {
   const { isAuthenticated, isLoading } = useConvexAuth();
-
+  const store = useStoreUserEffect();
   const router = useRouter()
-
-  if (isAuthenticated) {
-    router.push("/dashboard");
-  }
 
   if (isLoading) { 
     return <LoadingSpinner />
   }
 
-  return (
-    <main className="flex flex-col items-center justify-center gap-4">
-      <Link href="/" className="flex items-center gap-4 justify-center">
-        <Image src="/assets/logo.svg" alt="logo" width={50} height={50} />
-        <p className="text-heading3-bold text-light-1 max-xs:hidden">Fooder</p>
-      </Link>
-      <SignIn />
-    </main>
-  );
+  if (isAuthenticated) {
+    router.push("/dashboard");
+  } else { 
+      return (
+        <main className="flex flex-col items-center justify-center gap-4">
+          <Link href="/" className="flex items-center gap-4 justify-center">
+            <Image src="/assets/logo.svg" alt="logo" width={50} height={50} />
+            <p className="text-heading3-bold text-light-1 max-xs:hidden">
+              Fooder
+            </p>
+          </Link>
+          <SignIn />
+        </main>
+      );
+  }
 }

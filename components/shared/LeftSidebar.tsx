@@ -12,14 +12,14 @@ const LeftSidebar = () => {
   const { userId } = useAuth();
   return (
     <section className="custom-scrollbar leftsidebar">
-      <div className="flex w-full flex-1 flex-col gap-6 px-6">
+      <div className="flex w-full flex-1 flex-col gap-2 px-6">
         {sidebarLinks.map((link) => {
           const isActive = (pathname.includes(link.route) && link.route.length > 1) || pathname === link.route;
           return (
             <Link
               key={link.label}
               href={link.route}
-              className={`leftsidebar_link ${isActive && "bg-gray-100"}`}
+              className={`leftsidebar_link ${isActive ? "bg-gray-200 hover:bg-gray-200" : "hover:bg-gray-100"}`}
             >
               <Image
                 src={link.imgURL}
