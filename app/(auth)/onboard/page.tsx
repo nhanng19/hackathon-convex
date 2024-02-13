@@ -1,5 +1,9 @@
-const Onboard = () => {
-  return <>Onboard</>;
-};
+import Form from "./form"
 
-export default Onboard;
+export default function Onboard() {
+  return(
+    <main>
+      <Form />
+    </main>
+  )
+}
