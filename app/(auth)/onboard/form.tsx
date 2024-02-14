@@ -1,8 +1,10 @@
 "use client"
 
 import Image from 'next/image'
+import RangeSlider from './RangeSlider'
 
 export default function Form() {
+  
   return (
     
     <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -54,7 +56,8 @@ export default function Form() {
           <ul className="grid w-full gap-6 md:grid-cols-3">
             
             <div className="flex items-center me-4">
-                <input id="checkbox" type="checkbox" value="chinese" className="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                <input 
+                  id="checkbox" type="checkbox" value="chinese" className="w-4 h-4 text-red-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500 dark:focus:ring-red-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
                 <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Chinese</label>
             </div>
             <div className="flex items-center me-4">
@@ -70,8 +73,8 @@ export default function Form() {
                 <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Italian</label>
             </div>
             <div className="flex items-center me-4">
-                <input id="checkbox" type="checkbox" value="greek" className="w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
-                <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Greek</label>
+                <input id="checkbox" type="checkbox" value="mexican" className="w-4 h-4 text-yellow-400 bg-gray-100 border-gray-300 rounded focus:ring-yellow-500 dark:focus:ring-yellow-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                <label className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mexican</label>
             </div>
             <div className="flex items-center me-4">
                 <input id="checkbox" type="checkbox" value="indian" className="w-4 h-4 text-orange-500 bg-gray-100 border-gray-300 rounded focus:ring-orange-500 dark:focus:ring-orange-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
@@ -79,10 +82,19 @@ export default function Form() {
             </div>
           </ul>
 
-          <div className="slidecontainer">
+          {/* <div className="slidecontainer">
             <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Distance radius: </label>
-            <input id="default-range" type="range" value="50" className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"/>
-          </div>
+            <div id='rangeValue'>0</div>
+            <input id="default-range" type="range" min={0} max={100} className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700"/>
+          </div> */}
+          <RangeSlider
+            initialMin={2500}
+            initialMax={7500}
+            min={0}
+            max={10000}
+            step={100}
+            priceCap={1000}
+          />
         
           <div>
             <button type="submit" className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Sign up</button>
