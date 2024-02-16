@@ -36,3 +36,13 @@ export const getSingleUser = query({
     return user;
   },
 });
+
+
+export const updateUserProfile = mutation({
+  args: { id: v.id("user"), userData: v.any() },
+  handler: async (ctx, args) => { 
+    const { id, userData } = args;
+    // const { firstName, lastName, emailAddress, phoneNumber, bio, cuisines, maxRadius  } = userData;
+    await ctx.db.patch(id, { ...userData })
+  }
+})

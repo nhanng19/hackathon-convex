@@ -11,12 +11,15 @@
   "dependencies": {
     "@clerk/clerk-react": "^4.30.4",
     "@clerk/nextjs": "^4.29.6",
+    "@hookform/resolvers": "^3.3.4",
     "convex": "^1.8.0",
     "next": "14.1.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.50.1",
     "react-spinners": "^0.13.8",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",

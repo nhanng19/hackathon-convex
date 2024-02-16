@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, useEffect, useRef } from "react";
 
 const RangeSlider = ({ initialMin, initialMax, min, max, step, priceCap }) => {
