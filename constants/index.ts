@@ -25,3 +25,12 @@ export const sidebarLinks = [
     label: "Profile",
   },
 ];
+
+export const cuisineOptions = [
+  { id: 1, name: "Chinese" },
+  { id: 2, name: "American" },
+  { id: 3, name: "Vietnamese" },
+  { id: 4, name: "Italian" },
+  { id: 5, name: "Mexican" },
+  { id: 6, name: "Indian" },
+];
