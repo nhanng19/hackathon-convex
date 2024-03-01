@@ -16,5 +16,7 @@ export default function Home() {
   if (user?.onboarded == false) { 
     router.push("/onboard")
   }
-  return <main>Home</main>;
+  return (
+  <main>Home</main>
+  );
 }
