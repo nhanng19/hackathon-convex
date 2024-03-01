@@ -1,4 +1,5 @@
 "use client";
+
 import Image from "next/image";
 import RangeSlider from "./RangeSlider";
 import { currentUser } from "@clerk/nextjs";
@@ -6,14 +7,13 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserValidation } from "@/lib/validations/user";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import * as z from "zod";
+import { mapToStringArray } from "@/lib/utils";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -21,15 +21,12 @@ import {
 } from "@/components/ui/form";
 import { SliderComponent } from "@/components/ui/slider";
 import { cuisineOptions } from "@/constants";
-const options = [
-  { id: 1, name: "Option 1" },
-  { id: 2, name: "Option 2" },
-  { id: 3, name: "Option 3" },
-  { id: 4, name: "Option 4" },
-  { id: 5, name: "Option 5" },
-  { id: 6, name: "Option 6" },
-];
+import { useMutation, useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
+import { useRouter } from "next/navigation";
 
+import { useEffect, useState } from "react";
 interface Props {
   user: {
     firstName: string;
@@ -37,42 +34,58 @@ interface Props {
     emailAddress: string;
   };
 }
+
 interface FormData {
-  firstName: string;
-  lastName: string;
-  emailAddress: string;
-  phone: string;
-  bio: string;
+  name: string;
   cuisines: string[];
   maxRadius: number;
 }
 
+const miles: number[] = [];
+
+for (let i = 0; i <= 50; i += 10) {
+  miles.push(i);
+}
+
 export default function AccountForm({ user }: Props) {
+  const updateUserProfile = useMutation(api.user.updateUserProfile);
+  const userId = useQuery(api.user.getCurrentUser);
+  const router = useRouter();
+
+  const [location, setLocation] = useState<GeolocationCoordinates>();
+
+  useEffect(() => { 
+   if (navigator.geolocation) {
+     navigator.geolocation.getCurrentPosition(
+       (position) => { 
+         const positions = position.coords;
+         setLocation(positions)
+       }
+    )
+   } 
+  }, [])
+
   const form = useForm<FormData>({
     resolver: zodResolver(UserValidation),
     defaultValues: {
-      firstName: user?.firstName || "",
-      lastName: user?.lastName || "",
-      emailAddress: user?.emailAddress || "",
-      phone: "",
-      bio: "",
+      name: `${user.firstName} ${user.lastName}` || "",
       cuisines: [],
       maxRadius: 50,
     },
   });
 
   const onSubmit = async (values: z.infer<typeof UserValidation>) => {
-    console.log(values);
-  };
-
-  const mapToStringArray = (options, values) => {
-    return options.filter((option) => values.includes(option.name));
+    updateUserProfile({
+      id: userId as Id<"user">,
+      userData: { ...values, lat: location?.latitude, long: location?.longitude, onboarded: true },
+    });
+    router.push("/dashboard");
   };
 
   return (
-    <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-2xl">
-      <div className="bg-white py-8 px-6 rounded-lg sm:px-10">
-        <div className="sm:mx-auto sm:w-full flex flex-col items-start mb-8">
+    <div className="mt-8 sm:w-full ">
+      <div className="bg-white py-8 px-6 rounded-lg ">
+        <div className=" flex flex-col items-start mb-8">
           <Image
             className="mx-auto h-12 w-auto"
             src="/../favicon.ico"
@@ -89,98 +102,21 @@ export default function AccountForm({ user }: Props) {
         </div>
         <Form {...form}>
           <form
+            autoComplete="off"
             onSubmit={form.handleSubmit(onSubmit)}
             className="mb-0 space-y-6"
           >
-            <div className="grid gap-6 mb-6 md:grid-cols-2">
-              <FormField
-                control={form.control}
-                name="firstName"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col w-full gap-3">
-                    <FormLabel className="text-base-semibold text-dark-2">
-                      First Name
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="text"
-                        className="account-form_input no-focus"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="lastName"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col w-full gap-3">
-                    <FormLabel className="text-base-semibold text-dark-2">
-                      Last Name
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="text"
-                        className="account-form_input no-focus"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="emailAddress"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col w-full gap-3">
-                    <FormLabel className="text-base-semibold text-dark-2">
-                      Email
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="text"
-                        className="account-form_input no-focus"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col w-full gap-3">
-                    <FormLabel className="text-base-semibold text-dark-2">
-                      Phone Number
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="text"
-                        className="account-form_input no-focus"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
             <FormField
               control={form.control}
-              name="bio"
+              name="name"
               render={({ field }) => (
                 <FormItem className="flex flex-col w-full gap-3">
                   <FormLabel className="text-base-semibold text-dark-2">
-                    Bio
+                    Name
                   </FormLabel>
                   <FormControl>
-                    <Textarea
-                      rows={6}
+                    <Input
+                      type="text"
                       className="account-form_input no-focus"
                       {...field}
                     />
@@ -189,11 +125,11 @@ export default function AccountForm({ user }: Props) {
                 </FormItem>
               )}
             />
+
             <Controller
               control={form.control}
               name="cuisines"
               render={({ field }) => {
-                console.log(field)
                 return (
                   <FormItem>
                     <FormLabel className="text-base-semibold text-dark-2">
@@ -227,7 +163,7 @@ export default function AccountForm({ user }: Props) {
                 );
               }}
             />
- 
+
             <FormField
               control={form.control}
               name="maxRadius"
@@ -239,6 +175,11 @@ export default function AccountForm({ user }: Props) {
                   <FormControl>
                     <SliderComponent {...field} />
                   </FormControl>
+                  <div className="flex flex-row gap-4 w-full justify-between">
+                    {miles?.map((mile) => (
+                      <p className="text-small-regular">{mile} mi</p>
+                    ))}
+                  </div>
                   <FormMessage />
                 </FormItem>
               )}

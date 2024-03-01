@@ -7,6 +7,8 @@ import LeftSidebar from "@/components/shared/LeftSidebar";
 import RightSidebar from "@/components/shared/RightSidebar";
 import Bottombar from "@/components/shared/Bottombar";
 import ConvexClientProvider from "@/components/shared/ConvexClientProvider";
+import { Toaster} from "sonner"
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -24,6 +26,7 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning={true}>
         <body className={inter.className}>
           <Topbar />
+          <Toaster richColors closeButton/>
           <main className="flex flex-row">
             <LeftSidebar />
             <section className="main-container">

@@ -14,6 +14,7 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as feed from "../feed.js";
 import type * as todos from "../todos.js";
 import type * as user from "../user.js";
 
@@ -26,6 +27,7 @@ import type * as user from "../user.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  feed: typeof feed;
   todos: typeof todos;
   user: typeof user;
 }>;

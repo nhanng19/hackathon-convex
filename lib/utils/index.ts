@@ -5,3 +5,9 @@ import { twMerge } from "tailwind-merge";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+
+export const mapToStringArray = (options : any, values : any) => {
+  return options.filter((option : any) => values.includes(option.name));
+};
+
