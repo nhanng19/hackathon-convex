@@ -27,6 +27,7 @@ import { Id } from "@/convex/_generated/dataModel";
 import { useRouter } from "next/navigation";
 
 import { useEffect, useState } from "react";
+import useLocation from "@/hooks/useLocation";
 interface Props {
   user: {
     firstName: string;
@@ -51,20 +52,8 @@ export default function AccountForm({ user }: Props) {
   const updateUserProfile = useMutation(api.user.updateUserProfile);
   const userId = useQuery(api.user.getCurrentUser);
   const router = useRouter();
-
-  const [location, setLocation] = useState<GeolocationCoordinates>();
-
-  useEffect(() => { 
-   if (navigator.geolocation) {
-     navigator.geolocation.getCurrentPosition(
-       (position) => { 
-         const positions = position.coords;
-         setLocation(positions)
-       }
-    )
-   } 
-  }, [])
-
+  const location = useLocation();
+  
   const form = useForm<FormData>({
     resolver: zodResolver(UserValidation),
     defaultValues: {

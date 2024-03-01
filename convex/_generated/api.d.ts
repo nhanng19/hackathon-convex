@@ -17,6 +17,7 @@ import type {
 import type * as feed from "../feed.js";
 import type * as todos from "../todos.js";
 import type * as user from "../user.js";
+import type * as yelp from "../yelp.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -30,6 +31,7 @@ declare const fullApi: ApiFromModules<{
   feed: typeof feed;
   todos: typeof todos;
   user: typeof user;
+  yelp: typeof yelp;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,
