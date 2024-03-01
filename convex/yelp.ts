@@ -13,14 +13,13 @@ const getRestaurants = async ({
   cuisines,
 }: YelpParams) => {
   try {
-    console.log(cuisines);
     const url = `https://api.yelp.com/v3/businesses/search?latitude=${latitude}&longitude=${longitude}&term=${cuisines}&limit=50`;
     const response = await fetch(url, {
       method: "GET",
       headers: {
         Authorization:
           "Bearer " +
-          `${process.env.YELP_APY_KEY}`,
+          `${process.env.YELP_API_KEY}`,
         "Access-Control-Allow-Origin": "*",
       },
     });
