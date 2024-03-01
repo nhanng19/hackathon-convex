@@ -166,7 +166,7 @@ export default function AccountForm({ user }: Props) {
                   </FormControl>
                   <div className="flex flex-row gap-4 w-full justify-between">
                     {miles?.map((mile) => (
-                      <p className="text-small-regular">{mile} mi</p>
+                      <p key={mile} className="text-small-regular">{mile} mi</p>
                     ))}
                   </div>
                   <FormMessage />

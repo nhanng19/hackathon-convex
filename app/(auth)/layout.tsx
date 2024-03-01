@@ -12,15 +12,16 @@ export default function RootLayout({
 }) {
   return (
     <ConvexClientProvider>
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning={true}>
         <body
+          suppressHydrationWarning={true}
           style={{
             backgroundImage: `url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUG2zJSo8ySvxQDKvmRsLdaaJmRDnUmZDJm52L030FJw&s)`,
             backgroundRepeat: "no-repeat",
             backgroundSize: "cover",
           }}
         >
-          <Toaster richColors/>
+          <Toaster richColors />
           <div className="h-screen flex flex-col justify-center items-center">
             {children}
           </div>

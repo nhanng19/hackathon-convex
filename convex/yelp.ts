@@ -20,7 +20,7 @@ const getRestaurants = async ({
       headers: {
         Authorization:
           "Bearer " +
-          "5VIQsxmIHW5OiTntMOguATgmQrrCtZmy8ro_Ee8VXK_qNNsTdodI43XzVJyL2i2Ciyr8Ts99VT2hA7ysknWzjc2wT2tDP8AGT8MqlPHrJq6L9jvKUE6OXqgSvIhOY3Yx",
+          `${process.env.YELP_APY_KEY}`,
         "Access-Control-Allow-Origin": "*",
       },
     });
