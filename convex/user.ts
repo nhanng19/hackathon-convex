@@ -66,3 +66,18 @@ export const updateUserProfile = mutation({
     await ctx.db.patch(id, { ...userData });
   },
 });
+
+
+export const addResturant = mutation({
+  args: { id: v.id("user"), restaurantId: v.string() },
+  handler: async (ctx, args) => {
+    const { id, restaurantId } = args;
+    const user = await ctx.db
+    .query("user")
+    .filter((q) => q.eq(q.field("_id"), id))
+    .unique();
+    const restaurantArray = user.likedRestaurant
+    restaurantArray.push(restaurantId);
+    await ctx.db.patch(id, { likedRestaurant : restaurantArray });
+  },
+})
