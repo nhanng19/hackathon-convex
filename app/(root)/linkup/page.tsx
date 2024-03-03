@@ -4,30 +4,40 @@ import Card from "@/components/ui/card";
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import useStoreUserEffect from "@/hooks/useStoreUser";
-import { useQuery, useAction } from "convex/react";
+import { useQuery, useAction, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
 
 export default function LinkUp() {
   const userId = useStoreUserEffect();
   const user = useQuery(api.user.getSingleUser, {
-    userId: userId,
+    userId: userId ,
   });
   const fetchRestaurants = useAction(api.yelp.fetchRestaurants);
+  const addRestaurant = useMutation(api.user.addRestaurant);
   const [restaurants, setRestaurants] = useState<any[]>([]);
-  
+  const [fetch, shouldFetch] = useState<boolean>(false);
+  const handleAddRestaurant = (restaurantId: string) => {
+    addRestaurant({
+      id: userId as Id<"user">,
+      restaurantId,
+    });
+  };
+
   useEffect(() => {
     const handleFetchRestaurants = async () => {
-      if (user) {
-        const cuisines: string = user.cuisines.join(",")
+      if (!fetch && user) {
+        const cuisines: string = user.cuisines.join(",");
         const data = await fetchRestaurants({
           latitude: user.lat,
           longitude: user.long,
           cuisines: cuisines,
         });
-        console.log(data);
         setRestaurants(data?.businesses);
+        shouldFetch(true);
       }
     };
+
     handleFetchRestaurants();
   }, [user]);
 
@@ -35,6 +45,7 @@ export default function LinkUp() {
   const [leftSwipe, setLeftSwipe] = useState(0);
 
   const activeIndex = restaurants?.length - 1;
+  
   const removeCard = (id: number, action: "right" | "left") => {
     setRestaurants((prev) => prev.filter((card) => card.id !== id));
     if (action === "right") {
@@ -54,6 +65,7 @@ export default function LinkUp() {
               data={card}
               active={indx === activeIndex}
               removeCard={removeCard}
+              handleAddRestaurant={handleAddRestaurant}
             />
           ))
         ) : (

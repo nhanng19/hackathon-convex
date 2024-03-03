@@ -9,10 +9,10 @@ import {
 import Image from "next/image";
 import { useState } from "react";
 import SwipeButton from "./swipeButtons";
-
-const Card = ({ data, active, removeCard }: CardProps) => {
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
   const [exitX, setExitX] = useState(0);
-
   const x = useMotionValue(0);
   const input = [-200, 0, 200];
   const rotate = useTransform(x, [-200, 200], [-25, 25]);
@@ -25,6 +25,7 @@ const Card = ({ data, active, removeCard }: CardProps) => {
     if (info.offset.x > 100) {
       setExitX(200);
       removeCard(data.id, "right");
+      handleAddRestaurant(data.alias);
     } else if (info.offset.x < -100) {
       setExitX(-200);
       removeCard(data.id, "left");

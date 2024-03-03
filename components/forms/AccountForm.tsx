@@ -1,8 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import RangeSlider from "./RangeSlider";
-import { currentUser } from "@clerk/nextjs";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { UserValidation } from "@/lib/validations/user";
@@ -25,9 +23,8 @@ import { useMutation, useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useRouter } from "next/navigation";
-
-import { useEffect, useState } from "react";
 import useLocation from "@/hooks/useLocation";
+
 interface Props {
   user: {
     firstName: string;
@@ -53,7 +50,7 @@ export default function AccountForm({ user }: Props) {
   const userId = useQuery(api.user.getCurrentUser);
   const router = useRouter();
   const location = useLocation();
-  
+
   const form = useForm<FormData>({
     resolver: zodResolver(UserValidation),
     defaultValues: {
@@ -66,7 +63,7 @@ export default function AccountForm({ user }: Props) {
   const onSubmit = async (values: z.infer<typeof UserValidation>) => {
     updateUserProfile({
       id: userId as Id<"user">,
-      userData: { ...values, lat: location?.latitude, long: location?.longitude, onboarded: true, likeRestaurant:[] },
+      userData: { ...values, lat: location?.latitude, long: location?.longitude, onboarded: true },
     });
     router.push("/dashboard");
   };
@@ -166,7 +163,9 @@ export default function AccountForm({ user }: Props) {
                   </FormControl>
                   <div className="flex flex-row gap-4 w-full justify-between">
                     {miles?.map((mile) => (
-                      <p key={mile} className="text-small-regular">{mile} mi</p>
+                      <p key={mile} className="text-small-regular">
+                        {mile} mi
+                      </p>
                     ))}
                   </div>
                   <FormMessage />

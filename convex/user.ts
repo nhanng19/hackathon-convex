@@ -1,12 +1,10 @@
 import { mutation, query } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
-import { useUser } from "@clerk/clerk-react";
 
 export const getCurrentUser = query({
   args: {},
   async handler(ctx, args) {
     const identity = await ctx.auth.getUserIdentity();
-
     const user = await ctx.db
       .query("user")
       .filter((q) =>
@@ -26,7 +24,6 @@ export const store = mutation({
     if (!identity) {
       throw new ConvexError("Called storeUser without authentication present");
     }
-
     const user = await ctx.db
       .query("user")
       .filter((q) => q.eq(q.field("tokenIdentifier"), identity.tokenIdentifier))
@@ -42,10 +39,13 @@ export const store = mutation({
     return await ctx.db.insert("user", {
       name: identity.name!,
       onboarded: false,
+      likedRestaurant: [],
       tokenIdentifier: identity.tokenIdentifier,
     });
   },
 });
+
+
 
 export const getSingleUser = query({
   args: { userId: v.any() },
@@ -62,22 +62,25 @@ export const updateUserProfile = mutation({
   args: { id: v.id("user"), userData: v.any() },
   handler: async (ctx, args) => {
     const { id, userData } = args;
-    // const { firstName, lastName, emailAddress, phoneNumber, bio, cuisines, maxRadius  } = userData;
     await ctx.db.patch(id, { ...userData });
   },
 });
 
-
-export const addResturant = mutation({
+export const addRestaurant = mutation({
   args: { id: v.id("user"), restaurantId: v.string() },
   handler: async (ctx, args) => {
     const { id, restaurantId } = args;
-    const user = await ctx.db
-    .query("user")
-    .filter((q) => q.eq(q.field("_id"), id))
-    .unique();
-    const restaurantArray = user.likedRestaurant
+    const user = await ctx.db.get(id);
+    const restaurantArray = user?.likedRestaurants || [];
     restaurantArray.push(restaurantId);
-    await ctx.db.patch(id, { likedRestaurant : restaurantArray });
+    await ctx.db.patch(id, { likedRestaurants: restaurantArray });
   },
-})
+});
+
+export const getAllUsers = query({
+  args: {},
+  handler: async (ctx, args) => {
+    const users = await ctx.db.query("user").collect();
+    return users;
+  },
+});

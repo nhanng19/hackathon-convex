@@ -1,12 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import { api } from "@/convex/_generated/api";
 import { useQuery } from "convex/react";
 import useStoreUserEffect from "@/hooks/useStoreUser";
-import { Id } from "@/convex/_generated/dataModel";
 import { useRouter } from "next/navigation";
-import { toast } from "sonner";
 
 export default function Home() {
   const router = useRouter();
@@ -17,7 +14,5 @@ export default function Home() {
   if (user?.onboarded == false) {
     router.push("/onboard");
   }
-  return (
-  <main>Home</main>
-  );
+  return <main>Home</main>;
 }
