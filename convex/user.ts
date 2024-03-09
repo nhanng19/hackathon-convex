@@ -84,3 +84,28 @@ export const getAllUsers = query({
     return users;
   },
 });
+
+export const searchUsers = query({
+  args:{ username: v.string() },
+  handler: async (ctx, { username }) => {
+    try {
+      const users = await ctx.db
+        .query("users")
+        .filter((q) => q.eq(q.field("name"), username))
+        .collect();
+      
+      if (users) {
+        console.log('User found:', users);
+        return users;
+      } else {
+        console.log('User not found');
+        return null;
+      }
+    } catch (error) {
+      // Handle any errors
+      console.error("Error searching for user:", error);
+      throw error;
+    }
+  }
+}) 
+
