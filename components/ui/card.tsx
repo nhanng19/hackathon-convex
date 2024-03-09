@@ -1,16 +1,12 @@
 import { CardProps } from "@/types";
 import {
-  easeIn,
   motion,
   PanInfo,
   useMotionValue,
   useTransform,
 } from "framer-motion";
-import Image from "next/image";
 import { useState } from "react";
-import SwipeButton from "./swipeButtons";
-import { useMutation } from "convex/react";
-import { api } from "@/convex/_generated/api";
+
 const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
   const [exitX, setExitX] = useState(0);
   const x = useMotionValue(0);

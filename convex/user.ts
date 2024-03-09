@@ -45,8 +45,6 @@ export const store = mutation({
   },
 });
 
-
-
 export const getSingleUser = query({
   args: { userId: v.any() },
   handler: async (ctx, args) => {

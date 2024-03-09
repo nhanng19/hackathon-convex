@@ -11,10 +11,14 @@ const RightSidebar = () => {
         <h3 className="text-heading4-medium text-dark-1">
           Places you might like
         </h3>
-        <ul className="flex flex-col gap-4">
+        <ul className="flex flex-col gap-4 h-full justify-center">
           {restaurants?.slice(0, 5).map((restaurant) => (
             <li key={restaurant.alias}>
-                  <a target="_blank" href={restaurant.url} className="flex items-center gap-4 cursor-pointer">
+              <a
+                target="_blank"
+                href={restaurant.url}
+                className="flex items-center gap-4 cursor-pointer"
+              >
                 <img
                   className="w-10 h-10 rounded-full object-cover min-w-10 min-h-10"
                   src={restaurant.image_url}

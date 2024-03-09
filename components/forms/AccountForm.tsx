@@ -30,6 +30,7 @@ interface Props {
     firstName: string;
     lastName: string;
     emailAddress: string;
+    imageUrl: string;
   };
 }
 
@@ -63,7 +64,7 @@ export default function AccountForm({ user }: Props) {
   const onSubmit = async (values: z.infer<typeof UserValidation>) => {
     updateUserProfile({
       id: userId as Id<"user">,
-      userData: { ...values, lat: location?.latitude, long: location?.longitude, onboarded: true },
+      userData: { ...values, lat: location?.latitude, long: location?.longitude, onboarded: true, imageUrl: user.imageUrl },
     });
     router.push("/dashboard");
   };

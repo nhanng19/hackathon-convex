@@ -8,6 +8,7 @@ export default async function Onboard() {
     firstName: user?.firstName || "",
     lastName: user?.lastName || "",
     emailAddress: user?.emailAddresses[0].emailAddress || "",
+    imageUrl: user?.imageUrl,
   };
 
   return (
