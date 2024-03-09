@@ -7,6 +7,8 @@ import { useQuery, useAction, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import Link from "next/link";
+import Rogu from "../../../public/rogu.png";
+
 
 const Search = () => {
   
@@ -53,19 +55,26 @@ const Search = () => {
               Search
           </button>
       </div>
-      <section>
-        {users.length > 0 && (
-          <div className="h-full flex flex-col justify-center items-center">
-            {users
-             ?.filter((user) => user.name.toLowerCase().includes(filter.toLowerCase()))
-             ?.map((user) => (
-               <Link href={`/profile/${user._id}`} className="h-full flex flex-col justify-center items-center border border-radius p-2 m-2 w-full rounded-lg" key={user._id}>
-                  <button type='button'>{user.name}</button>
-               </Link>
-            ))}
-          </div>
-        )}
-      </section>
+      <ul className="flex flex-col gap-4">
+        <section>
+          {users.length > 0 && (
+            <div className="flex flex-col items-center gap-1 cursor-pointer">
+              {users
+              ?.filter((user) => user.name.toLowerCase().includes(filter.toLowerCase()))
+              ?.map((user) => (
+                <Link href={`/profile/${user._id}`} className="h-full flex justify-start items-center border border-radius p-2 m-2 w-full rounded-lg pl-8 gap-4" key={user._id}>
+                  <img
+                  className="w-10 h-10 rounded-full object-cover min-w-10 min-h-10"
+                  src={user.imageUrl}
+                  // alt={}
+                  />
+                    <h5 className="font-medium dark:text-white" type='button'>{user.name}</h5>
+                </Link>
+              ))}
+            </div>
+          )}
+        </section>
+      </ul>
     </form>
   );
 };
