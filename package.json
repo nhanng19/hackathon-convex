@@ -19,6 +19,8 @@
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slider": "^1.1.2",
     "@radix-ui/react-slot": "^1.0.2",
+    "@react-google-maps/api": "^2.17.1",
+    "@vis.gl/react-google-maps": "^0.7.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "convex": "^1.8.0",

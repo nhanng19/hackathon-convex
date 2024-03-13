@@ -20,7 +20,9 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-}) {
+  }) {
+  
+    
   return (
     <ConvexClientProvider>
       <html lang="en" suppressHydrationWarning={true}>
@@ -29,9 +31,7 @@ export default function RootLayout({
           <Toaster richColors closeButton/>
           <main className="flex flex-row">
             <LeftSidebar />
-            <section className="main-container">
-              <div className="w-full h-full max-w-4xl">{children}</div>
-            </section>
+            {children}
             <RightSidebar />
           </main>
           <Bottombar />

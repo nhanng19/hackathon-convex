@@ -14,5 +14,12 @@ export default function Home() {
   if (user?.onboarded == false) {
     router.push("/onboard");
   }
-  return <main>Home</main>;
+  return (
+    <section className="main-container">
+      <div className="w-full h-full max-w-4xl">
+
+        <main>Home</main>
+      </div>
+    </section>
+  );
 }
