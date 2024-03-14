@@ -118,9 +118,9 @@ export const list = query({
 });
 
 export const send = mutation({
-  args: { body: v.string(), author: v.string() },
-  handler: async (ctx, { body, author }) => {
+  args: { body: v.string(), author: v.any(), userId: v.any() },
+  handler: async (ctx, { body, author, userId }) => {
     // Send a new message.
-    await ctx.db.insert("messages", { body, author });
+    await ctx.db.insert("messages", { body, author, userId });
   },
 });
