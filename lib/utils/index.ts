@@ -19,7 +19,8 @@ export const convertEpoch = (time: number) => {
   const date = new Date(time)
   return date.toLocaleString()
 }
- export const getBorderStyle = (exitX : number) => {
+
+export const getBorderStyle = (exitX: number) => {
     if (exitX > 0) {
       return {
         boxShadow: `rgba(0, 255, 0, 0.4) 0px 5px, rgba(0, 255, 0, 0.3) 0px 10px, rgba(0, 255, 0, 0.2) 0px 15px, rgba(0, 255, 0, 0.1) 0px 20px, rgba(0, 255, 0, 0.05) 0px 25px`,
@@ -33,3 +34,7 @@ export const convertEpoch = (time: number) => {
     }
   };
 
+export const getMatchee = (pair : any[], userId : string) => {
+  const matchee = pair.filter((user) => user.id !== userId);
+  return matchee[0];
+}

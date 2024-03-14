@@ -15,6 +15,7 @@ import {
 } from "@react-google-maps/api";
 import styles from "./style.module.css";
 import MapComponent from "@/components/map/MapComponent";
+import { YelpBusiness } from "@/types";
 
 export default function LinkUp() {
   const userId = useStoreUserEffect();
@@ -26,10 +27,10 @@ export default function LinkUp() {
   const [restaurants, setRestaurants] = useState<any[]>([]);
   const [fetch, shouldFetch] = useState<boolean>(false);
   const [currentPosition, setCurrentPosition] = useState();
-  const handleAddRestaurant = (restaurantId: string) => {
+  const handleAddRestaurant = (restaurant: YelpBusiness) => {
     addRestaurant({
       id: userId as Id<"user">,
-      restaurantId,
+      restaurant,
     });
   };
 

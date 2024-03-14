@@ -21,7 +21,7 @@ const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
     if (info.offset.x > 100) {
       setExitX(200);
       removeCard(data.id, "right");
-      handleAddRestaurant(data.alias);
+      handleAddRestaurant(data);
     } else if (info.offset.x < -100) {
       setExitX(-200);
       removeCard(data.id, "left");

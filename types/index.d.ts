@@ -46,7 +46,7 @@ export type CardProps = {
   data: YelpBusiness;
   active: boolean;
   removeCard: (id: string, action: 'right' | 'left') => void;
-  handleAddRestaurant: (restaurantId: string) => void;
+  handleAddRestaurant: (restaurant: YelpBusiness) => void;
 };
 
 export type SwipeButtonProps = {

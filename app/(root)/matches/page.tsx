@@ -13,16 +13,17 @@ const NAME = "nhan";
 const Matches = () => {
   const messages = useQuery(api.user.list);
   const sendMessage = useMutation(api.user.send);
-
   const userId = useStoreUserEffect();
   const user = useQuery(api.user.getSingleUser, {
     userId: userId,
   });
-
+  const matches = useQuery(api.matches.getUserMatches, {
+    userId: userId
+  })
+  console.log(matches)
   const [newMessageText, setNewMessageText] = useState("");
 
   useEffect(() => {
-    // Make sure scrollTo works on button click in Chrome
     setTimeout(() => {
       window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
     }, 0);
@@ -68,7 +69,7 @@ const Matches = () => {
                     : ""
                 }
               >
-                <Image className="w-8 h-8 rounded-full" src={message.profilePhoto} alt="profile pic"/>
+                <Image className="w-8 h-8 rounded-full" src={message.profilePhoto} alt="profile pic" width={32} height={32} />
                 <div className="text-sm font-semibold text-gray-900 dark:text-white">
                   {message.author} {convertEpoch(message._creationTime)}
                 </div>

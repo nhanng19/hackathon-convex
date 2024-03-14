@@ -14,8 +14,9 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as crons from "../crons.js";
 import type * as feed from "../feed.js";
-import type * as todos from "../todos.js";
+import type * as matches from "../matches.js";
 import type * as user from "../user.js";
 import type * as yelp from "../yelp.js";
 
@@ -28,8 +29,9 @@ import type * as yelp from "../yelp.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  crons: typeof crons;
   feed: typeof feed;
-  todos: typeof todos;
+  matches: typeof matches;
   user: typeof user;
   yelp: typeof yelp;
 }>;

@@ -87,17 +87,16 @@ const Search = () => {
                         // href={`/profile/${user._id}`}
                         href={`/profile`}
                         className="h-full flex justify-start items-center border border-radius p-2 m-2 w-full rounded-lg pl-8 gap-4"
-                        key={user._id}  
+                        key={user._id}
                       >
                         <Image
                           className="w-10 h-10 rounded-full object-cover min-w-10 min-h-10"
                           src={user.imageUrl}
                           alt="profile pic"
+                          width={40}
+                          height={40}
                         />
-                        <h5
-                          className="font-medium dark:text-white"
-                          type="button"
-                        >
+                        <h5 className="font-medium dark:text-white">
                           {user.name}
                         </h5>
                       </Link>

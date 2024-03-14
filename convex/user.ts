@@ -65,12 +65,12 @@ export const updateUserProfile = mutation({
 });
 
 export const addRestaurant = mutation({
-  args: { id: v.id("user"), restaurantId: v.string() },
+  args: { id: v.id("user"), restaurant: v.any() },
   handler: async (ctx, args) => {
-    const { id, restaurantId } = args;
+    const { id, restaurant } = args;
     const user = await ctx.db.get(id);
     const restaurantArray = user?.likedRestaurants || [];
-    restaurantArray.push(restaurantId);
+    restaurantArray.push(restaurant);
     await ctx.db.patch(id, { likedRestaurants: restaurantArray });
   },
 });
@@ -124,3 +124,5 @@ export const send = mutation({
     await ctx.db.insert("messages", { body, author, userId, profilePhoto });
   },
 });
+
+
