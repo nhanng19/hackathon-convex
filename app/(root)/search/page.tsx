@@ -7,7 +7,6 @@ import { useQuery, useAction, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import Link from "next/link";
-import Rogu from "../../../public/rogu.png";
 
 const Search = () => {
   const usersData = useQuery(api.user.getAllUsers);
@@ -91,7 +90,6 @@ const Search = () => {
                         <img
                           className="w-10 h-10 rounded-full object-cover min-w-10 min-h-10"
                           src={user.imageUrl}
-                          // alt={}
                         />
                         <h5
                           className="font-medium dark:text-white"
