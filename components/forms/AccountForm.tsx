@@ -32,6 +32,9 @@ interface Props {
     emailAddress: string;
     imageUrl: string;
   };
+
+  title: string;
+  subtitle: string;
 }
 
 interface FormData {
@@ -46,7 +49,7 @@ for (let i = 0; i <= 50; i += 10) {
   miles.push(i);
 }
 
-export default function AccountForm({ user }: Props) {
+export default function AccountForm({ user, title, subtitle }: Props) {
   const updateUserProfile = useMutation(api.user.updateUserProfile);
   const userId = useQuery(api.user.getCurrentUser);
   const router = useRouter();
@@ -81,10 +84,10 @@ export default function AccountForm({ user }: Props) {
             alt="Fooder"
           />
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 self-start">
-            Welcome to Fooder!
+            {title}
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600 max-w">
-            Complete your onboarding to continue.
+            {subtitle}
           </p>
         </div>
         <Form {...form}>
@@ -105,6 +108,7 @@ export default function AccountForm({ user }: Props) {
                     <Input
                       type="text"
                       className="account-form_input no-focus"
+                      id="userName"
                       {...field}
                     />
                   </FormControl>
@@ -125,7 +129,7 @@ export default function AccountForm({ user }: Props) {
                     <Autocomplete
                       size="small"
                       multiple
-                      id="multiple-limit-tags"
+                      id="multiple-limit-tags chosenCuisines"
                       limitTags={4}
                       options={cuisineOptions}
                       value={mapToStringArray(cuisineOptions, field.value)}

@@ -6,19 +6,18 @@ import { useEffect, useState } from "react";
 import { getSingleUser } from "@/convex/user";
 import useStoreUserEffect from "@/hooks/useStoreUser";
 import { convertEpoch } from "@/lib/utils";
+import Image from "next/image";
 
 const NAME = "nhan";
 
 const Matches = () => {
   const messages = useQuery(api.user.list);
-  console.log(messages);
   const sendMessage = useMutation(api.user.send);
 
   const userId = useStoreUserEffect();
   const user = useQuery(api.user.getSingleUser, {
     userId: userId,
   });
-  console.log(user);
 
   const [newMessageText, setNewMessageText] = useState("");
 
@@ -58,7 +57,7 @@ const Matches = () => {
           </div>
           <div>
             <p>
-              connected as <strong>user</strong>
+              connected as <strong>{user?.name}</strong>
             </p>
             {messages?.map((message) => (
               <article
@@ -69,6 +68,7 @@ const Matches = () => {
                     : ""
                 }
               >
+                <Image className="w-8 h-8 rounded-full" src={message.profilePhoto} alt="profile pic"/>
                 <div className="text-sm font-semibold text-gray-900 dark:text-white">
                   {message.author} {convertEpoch(message._creationTime)}
                 </div>
@@ -88,6 +88,7 @@ const Matches = () => {
                   body: newMessageText,
                   author: user.name,
                   userId: userId,
+                  profilePhoto: user.imageUrl
                 });
                 setNewMessageText("");
               }}

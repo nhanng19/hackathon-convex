@@ -13,7 +13,7 @@ export default async function Onboard() {
 
   return (
     <main>
-      <AccountForm user={userData} />
+      <AccountForm user={userData} title={"Welcome to Fooder!"} subtitle={"Complete your onboarding to continue."}/>
     </main>
   );
 }

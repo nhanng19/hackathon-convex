@@ -7,6 +7,7 @@ import { useQuery, useAction, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import Link from "next/link";
+import Image from "next/image";
 
 const Search = () => {
   const usersData = useQuery(api.user.getAllUsers);
@@ -83,13 +84,15 @@ const Search = () => {
                     )
                     ?.map((user) => (
                       <Link
-                        href={`/profile/${user._id}`}
+                        // href={`/profile/${user._id}`}
+                        href={`/profile`}
                         className="h-full flex justify-start items-center border border-radius p-2 m-2 w-full rounded-lg pl-8 gap-4"
-                        key={user._id}
+                        key={user._id}  
                       >
-                        <img
+                        <Image
                           className="w-10 h-10 rounded-full object-cover min-w-10 min-h-10"
                           src={user.imageUrl}
+                          alt="profile pic"
                         />
                         <h5
                           className="font-medium dark:text-white"
