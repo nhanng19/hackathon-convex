@@ -5,6 +5,7 @@ import { api } from "@/convex/_generated/api";
 import { useEffect, useState } from "react";
 import { getSingleUser } from "@/convex/user";
 import useStoreUserEffect from "@/hooks/useStoreUser";
+import { convertEpoch } from "@/lib/utils";
 
 const NAME = "nhan";
 
@@ -36,9 +37,6 @@ const Activity = () => {
             <h1 className="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
               Matches:
             </h1>
-            {/* <a href="#" aria-current="true" className="block w-full px-4 py-2 text-white bg-blue-700 border-b border-gray-200 rounded-t-lg cursor-pointer dark:bg-gray-800 dark:border-gray-600">
-                John
-            </a> */}
             <a
               href="#"
               className="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
@@ -65,9 +63,9 @@ const Activity = () => {
             {messages?.map((message) => (
                 <article
                 key={message._id}
-                className={message.userId === userId ? "message-mine text-right" : "" } 
+                className={message.userId === userId ? "message-mine text-right flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-t-xl rounded-ts-xl dark:bg-gray-700" : "" } 
                 >
-                <div className="text-sm font-semibold text-gray-900 dark:text-white">{message.author}</div>
+                <div className="text-sm font-semibold text-gray-900 dark:text-white">{message.author} {convertEpoch(message._creationTime)}</div>
 
                 <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{message.body}</p>
                 <span className="text-sm font-normal text-gray-500 dark:text-gray-400">Delivered</span>
