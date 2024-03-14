@@ -9,16 +9,16 @@ import { convertEpoch } from "@/lib/utils";
 
 const NAME = "nhan";
 
-const Activity = () => {
+const Matches = () => {
   const messages = useQuery(api.user.list);
-  console.log(messages)
+  console.log(messages);
   const sendMessage = useMutation(api.user.send);
 
   const userId = useStoreUserEffect();
   const user = useQuery(api.user.getSingleUser, {
     userId: userId,
   });
-  console.log(user)
+  console.log(user);
 
   const [newMessageText, setNewMessageText] = useState("");
 
@@ -61,34 +61,48 @@ const Activity = () => {
               connected as <strong>user</strong>
             </p>
             {messages?.map((message) => (
-                <article
+              <article
                 key={message._id}
-                className={message.userId === userId ? "message-mine text-right flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-t-xl rounded-ts-xl dark:bg-gray-700" : "" } 
-                >
-                <div className="text-sm font-semibold text-gray-900 dark:text-white">{message.author} {convertEpoch(message._creationTime)}</div>
+                className={
+                  message.userId === userId
+                    ? "message-mine text-right flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-t-xl rounded-ts-xl dark:bg-gray-700"
+                    : ""
+                }
+              >
+                <div className="text-sm font-semibold text-gray-900 dark:text-white">
+                  {message.author} {convertEpoch(message._creationTime)}
+                </div>
 
-                <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">{message.body}</p>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400">Delivered</span>
-                </article>
+                <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
+                  {message.body}
+                </p>
+                <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
+                  Delivered
+                </span>
+              </article>
             ))}
             <form
-                onSubmit={async (e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
-                await sendMessage({ body: newMessageText, author: user.name, userId: userId});
+                await sendMessage({
+                  body: newMessageText,
+                  author: user.name,
+                  userId: userId,
+                });
                 setNewMessageText("");
-                }}
+              }}
             >
-                <input
+              <input
                 value={newMessageText}
                 onChange={async (e) => {
-                    const text = e.target.value;
-                    setNewMessageText(text);
+                  const text = e.target.value;
+                  setNewMessageText(text);
                 }}
                 placeholder="Write a message…"
-                />
-                <button type="submit" disabled={!newMessageText}>
+              />
+              <button type="submit" disabled={!newMessageText}>
                 Send
-                </button>
+              </button>
             </form>
           </div>
         </main>
@@ -97,4 +111,4 @@ const Activity = () => {
   );
 };
 
-export default Activity;
+export default Matches;

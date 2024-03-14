@@ -16,8 +16,8 @@ export const sidebarLinks = [
   },
   {
     imgURL: "/assets/heart.svg",
-    route: "/activity",
-    label: "Activity",
+    route: "/matches",
+    label: "Matches",
   },
   {
     imgURL: "/assets/user.svg",

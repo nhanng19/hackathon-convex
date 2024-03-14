@@ -39,7 +39,7 @@ const RightSidebar = () => {
           ))}
         </ul>
       </div>
-      <div className="flex flex-col flex-1 justify-start">
+      <div className="flex flex-col flex-1 justify-center">
         <h3 className="text-heading4-medium text-dark-1">
           Foodies you may know
         </h3>

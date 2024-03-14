@@ -172,6 +172,7 @@ const config: Config = {
         },
       ],
     },
+
     extend: {
       colors: {
         "primary-500": "#877EFF",
@@ -193,6 +194,7 @@ const config: Config = {
       boxShadow: {
         "count-badge": "0px 0px 6px 2px rgba(219, 188, 159, 0.30)",
         "groups-sidebar": "-30px 0px 60px 0px rgba(28, 28, 31, 0.50)",
+        "3xl": "0 35px 60px -15px rgba(0, 0, 0, 0.3)",
       },
       screens: {
         xs: "400px",

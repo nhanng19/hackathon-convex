@@ -6,7 +6,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { useState } from "react";
-
+import { getBorderStyle } from "@/lib/utils";
 const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
   const [exitX, setExitX] = useState(0);
   const x = useMotionValue(0);
@@ -28,19 +28,6 @@ const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
     }
   };
 
-  const getBorderStyle = () => {
-    if (exitX > 0) {
-      return {
-        boxShadow: `rgba(0, 255, 0, 0.4) 0px 5px, rgba(0, 255, 0, 0.3) 0px 10px, rgba(0, 255, 0, 0.2) 0px 15px, rgba(0, 255, 0, 0.1) 0px 20px, rgba(0, 255, 0, 0.05) 0px 25px`,
-      };
-    } else if (exitX < 0) {
-      return {
-        boxShadow: `rgba(255, 0, 0, 0.4) 0px 5px, rgba(255, 0, 0, 0.3) 0px 10px, rgba(255, 0, 0, 0.2) 0px 15px, rgba(255, 0, 0, 0.1) 0px 20px, rgba(255, 0, 0, 0.05) 0px 25px`,
-      };
-    } else {
-      return {};
-    }
-  };
 
   return (
     <>
@@ -55,7 +42,7 @@ const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
             scale: 1.05,
             opacity: 1,
           }}
-          style={{ x, rotate, opacity, ...getBorderStyle() }}
+          style={{ x, rotate, opacity, ...getBorderStyle(exitX) }}
           transition={{ type: "tween", duration: 0.3, ease: "easeIn" }}
           whileDrag={{ cursor: "grabbing" }}
           exit={{ x: exitX }}

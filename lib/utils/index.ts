@@ -19,3 +19,17 @@ export const convertEpoch = (time: number) => {
   const date = new Date(time)
   return date.toLocaleString()
 }
+ export const getBorderStyle = (exitX : number) => {
+    if (exitX > 0) {
+      return {
+        boxShadow: `rgba(0, 255, 0, 0.4) 0px 5px, rgba(0, 255, 0, 0.3) 0px 10px, rgba(0, 255, 0, 0.2) 0px 15px, rgba(0, 255, 0, 0.1) 0px 20px, rgba(0, 255, 0, 0.05) 0px 25px`,
+      };
+    } else if (exitX < 0) {
+      return {
+        boxShadow: `rgba(255, 0, 0, 0.4) 0px 5px, rgba(255, 0, 0, 0.3) 0px 10px, rgba(255, 0, 0, 0.2) 0px 15px, rgba(255, 0, 0, 0.1) 0px 20px, rgba(255, 0, 0, 0.05) 0px 25px`,
+      };
+    } else {
+      return {};
+    }
+  };
+
