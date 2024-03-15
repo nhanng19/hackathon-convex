@@ -3,6 +3,7 @@
 import useRestaurants from "@/hooks/useRestaurant";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
+import Image from "next/image";
 const RightSidebar = () => {
   const restaurants = useRestaurants();
   const users = useQuery(api.user.getAllUsers);
@@ -20,10 +21,12 @@ const RightSidebar = () => {
                 href={restaurant.url}
                 className="flex items-center gap-4 cursor-pointer"
               >
-                <img
+                <Image
                   className="w-10 h-10 rounded-full object-cover min-w-10 min-h-10"
                   src={restaurant.image_url}
                   alt={restaurant.name}
+                  width={40}
+                  height={40}
                 />
                 <div className="font-medium dark:text-white">
                   <div className="truncate ... overflow-hidden">
@@ -51,10 +54,12 @@ const RightSidebar = () => {
                 href={user.url}
                 className="flex items-center gap-4 cursor-pointer"
               >
-                <img
+                <Image
                   className="w-10 h-10 rounded-full object-cover min-w-10 min-h-10"
                   src={user.imageUrl}
                   alt={user.name}
+                  width={40}
+                  height={40}
                 />
                 <div className="font-medium dark:text-white">
                   <div className="truncate ... overflow-hidden">
