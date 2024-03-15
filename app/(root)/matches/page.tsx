@@ -1,112 +1,57 @@
 "use client";
 
-import { useQuery, useMutation } from "convex/react";
-import { api } from "@/convex/_generated/api";
 import { useEffect, useState } from "react";
-import { getSingleUser } from "@/convex/user";
-import useStoreUserEffect from "@/hooks/useStoreUser";
-import { convertEpoch } from "@/lib/utils";
-import Image from "next/image";
-
-const NAME = "nhan";
+import { xorHash } from "@/lib/utils";
+import useGetMatches from "@/hooks/useGetMatches";
+import Chat from "@/components/chat/chat";
 
 const Matches = () => {
-  const messages = useQuery(api.user.list);
-  const sendMessage = useMutation(api.user.send);
-  const userId = useStoreUserEffect();
-  const user = useQuery(api.user.getSingleUser, {
-    userId: userId,
-  });
-  const matches = useQuery(api.matches.getUserMatches, {
-    userId: userId
-  })
-  console.log(matches)
-  const [newMessageText, setNewMessageText] = useState("");
-
-  useEffect(() => {
-    setTimeout(() => {
-      window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
-    }, 0);
-  }, [messages]);
-
+  const { matchee, userId, user } = useGetMatches();
+  const [chatRoomId, setChatRoomId] = useState<string>();
   return (
     <section className="main-container">
       <div className="w-full h-full max-w-4xl">
-        <main className="chat flex items-start gap-2.5">
-          <div className="w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-            <h1 className="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white">
-              Matches:
-            </h1>
-            <a
-              href="#"
-              className="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-            >
-              Ryan
-            </a>
-            <a
-              href="#"
-              className="block w-full px-4 py-2 border-b border-gray-200 cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-            >
-              Sarah
-            </a>
-            <a
-              href="#"
-              className="block w-full px-4 py-2 rounded-b-lg cursor-pointer hover:bg-gray-100 hover:text-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-            >
-              Mandy
-            </a>
-          </div>
-          <div>
-            <p>
-              connected as <strong>{user?.name}</strong>
-            </p>
-            {messages?.map((message) => (
-              <article
-                key={message._id}
-                className={
-                  message.userId === userId
-                    ? "message-mine text-right flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-t-xl rounded-ts-xl dark:bg-gray-700"
-                    : ""
-                }
-              >
-                <Image className="w-8 h-8 rounded-full" src={message.profilePhoto} alt="profile pic" width={32} height={32} />
-                <div className="text-sm font-semibold text-gray-900 dark:text-white">
-                  {message.author} {convertEpoch(message._creationTime)}
-                </div>
+        <main className="gap-2.5">
+          <div style={{ width: "20%" }}>
+            <div className=" max-w-64 mx-auto bg-white shadow-lg rounded-lg fixed border border-light-2">
+              <div className="py-3 px-5 flex flex-col gap-2">
+                <h3 className="text-xs font-semibold uppercase text-gray-400 mb-1">
+                  Matches
+                </h3>
 
-                <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
-                  {message.body}
-                </p>
-                <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                  Delivered
-                </span>
-              </article>
-            ))}
-            <form
-              onSubmit={async (e) => {
-                e.preventDefault();
-                await sendMessage({
-                  body: newMessageText,
-                  author: user.name,
-                  userId: userId,
-                  profilePhoto: user.imageUrl
-                });
-                setNewMessageText("");
-              }}
-            >
-              <input
-                value={newMessageText}
-                onChange={async (e) => {
-                  const text = e.target.value;
-                  setNewMessageText(text);
-                }}
-                placeholder="Write a message…"
-              />
-              <button type="submit" disabled={!newMessageText}>
-                Send
-              </button>
-            </form>
+                <div className="divide-y divide-gray-200">
+                  {matchee?.map((match) => (
+                    <button
+                      onClick={() => {
+                        setChatRoomId(xorHash(userId, match.id));
+                      }}
+                      className="w-full text-left py-2 focus:outline-none focus-visible:bg-indigo-50"
+                    >
+                      <div className="flex items-center">
+                        <img
+                          className="rounded-full items-start flex-shrink-0 mr-3 w-12 h-12"
+                          src={match.photo}
+                          height="32"
+                          alt="Marie Zulfikar"
+                        />
+                        <div>
+                          <h4 className="text-sm font-semibold text-gray-900">
+                            {match.name}
+                          </h4>
+                          <div className="text-[13px]">
+                            New Match · 2hrs ago
+                          </div>
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
+          {chatRoomId && (
+            <Chat user={user} userId={userId} chatRoomId={chatRoomId} />
+          )}
         </main>
       </div>
     </section>

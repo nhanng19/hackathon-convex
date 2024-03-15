@@ -1,10 +1,5 @@
 import { CardProps } from "@/types";
-import {
-  motion,
-  PanInfo,
-  useMotionValue,
-  useTransform,
-} from "framer-motion";
+import { motion, PanInfo, useMotionValue, useTransform } from "framer-motion";
 import { useState } from "react";
 import { getBorderStyle } from "@/lib/utils";
 const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
@@ -28,7 +23,6 @@ const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
     }
   };
 
-
   return (
     <>
       {active ? (
@@ -49,7 +43,10 @@ const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
           className="cursor-grab absolute flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-2xl self-center items-center justify-center"
         >
           <div className="relative overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40 w-full h-[268px]">
-            <img src={data?.image_url} />
+            <img
+              src={data?.image_url}
+              className="inset-0 object-cover h-full w-full"
+            />
             <div className="absolute inset-0 w-full h-full to-bg-black-10 bg-gradient-to-tr from-transparent via-transparent to-black/60"></div>
             <button
               className="!absolute  top-4 right-4 h-8 max-h-[31px] w-8 max-w-[32px] select-none rounded-full text-center align-middle font-sans text-xs font-medium uppercase text-red-500 transition-all hover:bg-red-500/10 active:bg-red-500/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"

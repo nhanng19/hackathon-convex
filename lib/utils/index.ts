@@ -1,3 +1,4 @@
+import { Id } from "@/convex/_generated/dataModel";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -34,7 +35,28 @@ export const getBorderStyle = (exitX: number) => {
     }
   };
 
-export const getMatchee = (pair : any[], userId : string) => {
+export const getMatchee = (pair : any[], userId : Id<"user"> | null) => {
   const matchee = pair.filter((user) => user.id !== userId);
   return matchee[0];
+}
+
+export const  xorHash = (str1: any, str2: any) => {
+  const maxLength = Math.max(str1.length, str2.length);
+  const paddedStr1 = str1.padEnd(maxLength, " ");
+  const paddedStr2 = str2.padEnd(maxLength, " ");
+  let hash = "";
+  for (let i = 0; i < maxLength; i++) {
+    const charCode1 = paddedStr1.charCodeAt(i);
+    const charCode2 = paddedStr2.charCodeAt(i);
+    const xorResult = charCode1 ^ charCode2;
+    const hexString = xorResult.toString(16).padStart(2, "0");
+    hash += hexString;
+  }
+  return hash;
+}
+
+export function isUserOnline(epochTime: number) {
+  const currentTime = Date.now();
+  const timeDifference = currentTime - epochTime * 1000;
+  return timeDifference <= 10000;
 }

@@ -10,14 +10,14 @@ export const sidebarLinks = [
     label: "LinkUp",
   },
   {
-    imgURL: "/assets/search.svg",
-    route: "/search",
-    label: "Search",
-  },
-  {
     imgURL: "/assets/heart.svg",
     route: "/matches",
     label: "Matches",
+  },
+  {
+    imgURL: "/assets/search.svg",
+    route: "/search",
+    label: "Search",
   },
   {
     imgURL: "/assets/user.svg",

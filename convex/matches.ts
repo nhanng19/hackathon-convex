@@ -6,6 +6,8 @@ import {
 } from "./_generated/server";
 import { ConvexError, v } from "convex/values";
 import { internal } from "./_generated/api";
+import { mutation } from "./_generated/server";
+
 
 export const getAllMatches = internalQuery({
   args: {},
@@ -56,12 +58,37 @@ export const getUserMatches = query({
   args: { userId: v.any() },
   handler: async (ctx, args) => {
     const { userId } = args;
-    const data = await ctx.db
-      .query("matches")
-      .collect();
-    const matches = data.filter((match) => match.compositeKey.includes(userId))
+    const data = await ctx.db.query("matches").collect();
+    const matches = data.filter((match) => match.compositeKey.includes(userId));
     return matches;
   },
+});
+
+export const getChatRoom = query({
+  args: { hashKey: v.any() },
+  handler: async (ctx, args) => {
+    const { hashKey } = args;
+    const data = await ctx.db
+      .query("matches")
+      .filter((q) => q.eq(q.field("hashKey"), hashKey))
+      .unique();
+    return data;
+  },
+});
+
+
+export const sendMessage = mutation({
+  args: { compositeKey: v.any(), message: v.any()},
+  handler: async (ctx, args) => { 
+    const { compositeKey, message } = args;
+    const data = await ctx.db
+      .query("matches")
+      .filter((q) => q.eq(q.field("compositeKey"), compositeKey))
+      .unique();
+    const messages = data.messages || [];
+    messages.push(message);
+    await ctx.db.patch(data._id, { messages: messages });
+  }
 });
 
 function findMatchingPairs(users: any) {
@@ -77,6 +104,7 @@ function findMatchingPairs(users: any) {
         const user2Id = users[j]._id;
         matchingPairs.push({
           compositeKey: `${user1Id}-${user2Id}`,
+          hashKey: xorHash(user1Id, user2Id),
           pair: [
             {
               id: user1Id,
@@ -90,6 +118,7 @@ function findMatchingPairs(users: any) {
             },
           ],
           commonRestaurants: commonRestaurants,
+          messages: [],
         });
       }
     }
@@ -103,4 +132,19 @@ function findCommonRestaurants(restaurants1: any, restaurants2: any) {
       return restaurant1.alias === restaurant2.alias;
     });
   });
+}
+
+function xorHash(str1: string, str2: string) {
+  const maxLength = Math.max(str1.length, str2.length);
+  const paddedStr1 = str1.padEnd(maxLength, " ");
+  const paddedStr2 = str2.padEnd(maxLength, " ");
+  let hash = "";
+  for (let i = 0; i < maxLength; i++) {
+    const charCode1 = paddedStr1.charCodeAt(i);
+    const charCode2 = paddedStr2.charCodeAt(i);
+    const xorResult = charCode1 ^ charCode2;
+    const hexString = xorResult.toString(16).padStart(2, "0");
+    hash += hexString;
+  }
+  return hash;
 }
