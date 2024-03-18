@@ -10,7 +10,7 @@ You can also try out the [live demo](https://fooder-convex.netlify.app/) by logg
 
 Finding a meal can be challenging, especially in a bustling city like Los Angeles where the options seem endless. My friend and I often struggled to settle on a restaurant when making dinner plans with a group, leading to frustration. That's when we came up with the idea for an app that's essentially Tinder for food. Our app streamlines the decision-making process by presenting users with curated food options that they can swipe through quickly. This not only helps users make choices faster but also allows them to potentially connect with fellow food enthusiasts for dining meetups. Our goal is to simplify the dining experience and foster connections over delicious food choices. After users are allowed to share their dining experiences and connect with friends or potential matches through our social platform.
 
-![Matches](/assets/matches.PNG)
+![Matches](/assets/clerk1.PNG)
 
 ## 💻 What it does
 
