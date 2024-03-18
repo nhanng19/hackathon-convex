@@ -11,9 +11,8 @@ const Matches = () => {
   return (
     <section className="main-container">
       <div className="w-full h-full max-w-4xl">
-        <main className="gap-2.5">
-          <div style={{ width: "20%" }}>
-            <div className=" max-w-64 mx-auto shadow-lg rounded-lg fixed  bg-gray-900">
+          <div className="w-full md:w-[20%]">
+            <div className="max-w-64 mx-auto shadow-lg rounded-lg fixed  bg-gray-900">
               <div className="py-3 px-5 flex flex-col gap-2">
                 <h3 className="text-xs font-semibold uppercase text-gray-400 mb-1">
                   Matches
@@ -82,7 +81,6 @@ const Matches = () => {
               </div>
             )}
           </div>
-        </main>
       </div>
     </section>
   );
