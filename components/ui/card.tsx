@@ -3,10 +3,14 @@ import { motion, PanInfo, useMotionValue, useTransform } from "framer-motion";
 import { useState } from "react";
 import { getBorderStyle } from "@/lib/utils";
 import SwipeButton from "./swipeButtons";
+import Reviews from "./modal";
 const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
+  const alias = data.alias
   const [exitX, setExitX] = useState(0);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const x = useMotionValue(0);
-  const input = [-200, 0, 200];
   const rotate = useTransform(x, [-200, 200], [-25, 25]);
   const opacity = useTransform(x, [-200, -125, 0, 125, 200], [0, 1, 1, 1, 0]);
 
@@ -156,7 +160,7 @@ const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
                   ></path>
                 </svg>
               </span>
-              <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70 text-small-regular">
+              <span onClick={handleOpen} className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70 text-small-regular">
                 +{data.review_count} reviews
               </span>
             </div>
@@ -171,6 +175,7 @@ const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
               </button>
             </a>
           </div>
+          <Reviews {...{ open, handleClose, handleOpen, alias}} />
         </motion.div>
       ) : null}
 
