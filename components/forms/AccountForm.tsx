@@ -99,7 +99,7 @@ export default function AccountForm({ user, title, subtitle }: Props) {
           <div className=" flex flex-col items-start mb-8">
             <Image
               className="mx-auto h-12 w-auto"
-              src="/../favicon.ico"
+              src="/assets/logo.svg"
               width={500}
               height={500}
               alt="Fooder"
