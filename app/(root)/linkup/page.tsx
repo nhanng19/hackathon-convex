@@ -37,7 +37,7 @@ export default function LinkUp() {
           longitude: user.long,
           cuisines: cuisines,
         });
-        const restaurantsData = data?.businesses
+        const restaurantsData = data?.businesses;
         setRestaurants(restaurantsData);
         setCurrentPosition(restaurantsData[restaurantsData.length - 1]);
         shouldFetch(true);
@@ -55,7 +55,6 @@ export default function LinkUp() {
   const removeCard = (id: string, action: "right" | "left") => {
     setRestaurants((prev) => prev.filter((card) => card.id !== id));
     if (action === "right") {
-      
       setRightSwipe((prev) => prev + 1);
     } else {
       setLeftSwipe((prev) => prev + 1);
@@ -66,11 +65,10 @@ export default function LinkUp() {
     setCurrentPosition(restaurants[restaurants.length - 1]);
   }, [restaurants]);
 
-
   return (
     <section className="main-container p-0">
       <div className="w-full h-full">
-        <div className="relative flex h-full w-full items-center justify-center overflow-hidden bg-white text-textGrey">
+        <div className="relative flex h-full w-full items-center justify-center overflow-hidden text-textGrey">
           <div className="flex-1 flex justify-center items-center shadow-2xl z-20 w-full h-full">
             <AnimatePresence>
               {restaurants?.length ? (
@@ -92,7 +90,11 @@ export default function LinkUp() {
               )}
             </AnimatePresence>
           </div>
-          <MapComponent defaultZoom={12} defaultCenter={{ lat: user?.lat, lng: user?.long }} currentPosition={currentPosition} />
+          <MapComponent
+            defaultZoom={12}
+            defaultCenter={{ lat: user?.lat, lng: user?.long }}
+            currentPosition={currentPosition}
+          />
         </div>
       </div>
     </section>

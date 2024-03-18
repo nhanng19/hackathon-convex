@@ -4,8 +4,9 @@ import { useState } from "react";
 import { getBorderStyle } from "@/lib/utils";
 import SwipeButton from "./swipeButtons";
 import Reviews from "./modal";
+
 const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
-  const alias = data.alias
+  const alias = data.alias;
   const [exitX, setExitX] = useState(0);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
@@ -45,7 +46,7 @@ const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
           transition={{ type: "tween", duration: 0.3, ease: "easeIn" }}
           whileDrag={{ cursor: "grabbing" }}
           exit={{ x: exitX }}
-          className="cursor-grab absolute flex w-full max-w-[26rem] flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-2xl self-center items-center justify-center"
+          className="cursor-grab absolute flex w-full max-w-[26rem] flex-col rounded-xl bg-gray-900 bg-clip-border text-light-1 shadow-2xl self-center items-center justify-center"
         >
           <div className="relative overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40 w-full h-[268px]">
             <img
@@ -79,7 +80,7 @@ const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
                   fill="currentColor"
-                  className="-mt-0.5 h-5 w-5 text-yellow-700"
+                  className="-mt-0.5 h-5 w-5 text-yellow-300"
                 >
                   <path
                     fillRule="evenodd"
@@ -90,7 +91,7 @@ const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
                 {data?.rating}
               </p>
             </div>
-            <p className="block font-sans text-base antialiased  leading-relaxed text-gray-700">
+            <p className="block font-sans text-base antialiased  leading-relaxed text-light-1">
               {data.categories.map((category, indx) => (
                 <span key={category.title}>
                   {category.title}
@@ -98,15 +99,15 @@ const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
                 </span>
               ))}
             </p>
-            <p className="block font-sans text-base antialiased font-light leading-relaxed text-gray-700">
+            <p className="block font-sans text-base antialiased font-light leading-relaxed text-light-2">
               {data?.location?.display_address[0]}{" "}
               {data?.location?.display_address[1]}
             </p>
-            <p className="block font-sans text-base antialiased font-light leading-relaxed text-gray-700">
+            <p className="block font-sans text-base antialiased font-light leading-relaxed text-gray-300">
               {data?.phone}
             </p>
             <div className="inline-flex flex-wrap items-center gap-3 mt-8 group">
-              <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
+              <span className="cursor-pointer rounded-full border borderwhite bg-gray-900/5 p-3 text-light transition-colors hover:border-white hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -120,7 +121,7 @@ const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
                   ></path>
                 </svg>
               </span>
-              <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
+              <span className="cursor-pointer rounded-full border border-white bg-gray-900/5 p-3 text-light transition-colors hover:border-white hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -131,7 +132,7 @@ const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
                   <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z"></path>
                 </svg>
               </span>
-              <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
+              <span className="cursor-pointer rounded-full border border-white bg-gray-900/5 p-3 text-light transition-colors hover:border-white hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -146,7 +147,7 @@ const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
                   ></path>
                 </svg>
               </span>
-              <span className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
+              <span className="cursor-pointer rounded-full border border-white bg-gray-900/5 p-3 text-light transition-colors hover:border-white hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
@@ -160,7 +161,10 @@ const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
                   ></path>
                 </svg>
               </span>
-              <span onClick={handleOpen} className="cursor-pointer rounded-full border border-gray-900/5 bg-gray-900/5 p-3 text-gray-900 transition-colors hover:border-gray-900/10 hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70 text-small-regular">
+              <span
+                onClick={handleOpen}
+                className="cursor-pointer rounded-full border border-white bg-gray-900/5 p-3 text-light transition-colors hover:border-white hover:bg-gray-900/10 hover:!opacity-100 group-hover:opacity-70 text-small-regular"
+              >
                 +{data.review_count} reviews
               </span>
             </div>
@@ -175,7 +179,7 @@ const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
               </button>
             </a>
           </div>
-          <Reviews {...{ open, handleClose, handleOpen, alias}} />
+          <Reviews {...{ open, handleClose, handleOpen, alias }} />
         </motion.div>
       ) : null}
 

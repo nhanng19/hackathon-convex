@@ -21,19 +21,19 @@ const CreateForm = ({ userId }: Props) => {
   };
   return (
     <>
-      <div className="max-w-2xl mx-auto px-4">
+      <div className="mx-auto">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
+          <h2 className="text-lg lg:text-2xl font-bold text-white">
             Post
           </h2>
         </div>
-        <form className="mb-6" onSubmit={(e) => handleSubmit(e)}>
-          <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        <form className="mb-6 " onSubmit={(e) => handleSubmit(e)}>
+          <div className="py-2 px-4 mb-4  rounded-lg rounded-t-lg border  bg-gray-800 border-gray-700">
             <label className="sr-only">Your post</label>
             <textarea
               id="comment"
               rows={6}
-              className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+              className="px-0 w-full text-sm border-0 focus:ring-0 focus:outline-none text-white placeholder-gray-400 bg-gray-800"
               placeholder="Write a post..."
               value={postContent}
               onChange={handleInputChange}

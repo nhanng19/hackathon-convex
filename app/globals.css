@@ -9,7 +9,7 @@ html {
 @layer components {
   /* main */
   .main-container {
-    @apply flex min-h-screen flex-1 flex-col items-center bg-white px-6 pb-10 pt-28 max-md:pb-32 sm:px-10;
+    @apply flex min-h-screen flex-1 flex-col items-center bg-black px-6 pb-10 pt-28 max-md:pb-32 sm:px-10;
   }
 
   /* Head Text */
@@ -63,7 +63,7 @@ html {
   }
 
   .topbar {
-    @apply fixed top-0 z-30 flex w-full items-center justify-between bg-white shadow-md px-6 py-3;
+    @apply fixed top-0 z-30 flex w-full items-center justify-between bg-slate-950 shadow-md px-6 py-3;
   }
 
   .bottombar {
@@ -79,7 +79,7 @@ html {
   }
 
   .leftsidebar {
-    @apply sticky left-0 top-0 z-20 flex h-screen w-fit flex-col justify-between overflow-auto bg-white shadow-2xl pb-5 pt-28 max-md:hidden;
+    @apply sticky left-0 top-0 z-20 flex h-screen w-fit flex-col justify-between overflow-auto bg-slate-950 shadow-2xl pb-5 pt-28 max-md:hidden;
   }
 
   .leftsidebar_link {
@@ -91,7 +91,7 @@ html {
   }
 
   .rightsidebar {
-    @apply sticky right-0 top-0 z-20 flex h-screen w-fit flex-col justify-between gap-4 bg-white shadow-2xl px-10 pb-6 pt-20 max-xl:hidden overflow-hidden;
+    @apply sticky right-0 top-0 z-20 flex h-screen w-fit flex-col justify-between gap-4 bg-slate-950 shadow-2xl px-10 pb-6 pt-20 max-xl:hidden overflow-hidden;
   }
 }
 
@@ -144,7 +144,7 @@ html {
 
 /* Account Profile  */
 .account-form_image-label {
-  @apply flex h-24 w-24 items-center justify-center rounded-full bg-dark-4 text-dark-1 !important;
+  @apply flex h-24 w-24 items-center justify-center rounded-full bg-dark-4 !important;
 }
 
 .account-form_image-input {
@@ -152,9 +152,17 @@ html {
 }
 
 .account-form_input {
-  @apply border border-gray-300 bg-light-1 text-dark-1 !important;
+  @apply border border-dark-4 bg-dark-3 text-light-1 !important;
 }
 
+/* Comment Form */
+.comment-form {
+  @apply mt-10 flex items-center gap-4 border-y border-y-dark-4 py-5 max-xs:flex-col !important;
+}
+
+.comment-form_btn {
+  @apply rounded-3xl bg-primary-500 px-8 py-2 !text-small-regular text-light-1 max-xs:w-full !important;
+}
 /* Comment Form */
 .comment-form {
   @apply mt-10 flex items-center gap-4 border-y border-y-dark-4 py-5 max-xs:flex-col !important;
@@ -164,3 +172,24 @@ html {
   @apply rounded-3xl bg-primary-500 px-8 py-2 !text-small-regular text-dark-1 max-xs:w-full !important;
 }
 
+html::-webkit-scrollbar {
+  width: 1rem;
+}
+
+html::-webkit-scrollbar-track {
+  background: #000;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: #ffffff;
+  border-radius: 5px;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 2rem;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #ffffff;
+  border-radius: 5px;
+}

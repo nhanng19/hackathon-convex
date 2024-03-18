@@ -39,8 +39,11 @@ const Chat = ({ user, userId, chatRoomId }: Props) => {
 
   return (
     <>
-      <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
-        <Link href={`/profile/${matchee._id}`} className="relative flex items-center space-x-4 hover:bg-slate-100 w-full rounded-md">
+      <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-800">
+        <Link
+          href={`/profile/${matchee._id}`}
+          className="relative flex items-center space-x-4 hover:bg-slate-700 w-full rounded-md"
+        >
           <div className="relative">
             <span className={"absolute right-0 bottom-0 text-green-500"}>
               <svg width="20" height="20">
@@ -55,9 +58,9 @@ const Chat = ({ user, userId, chatRoomId }: Props) => {
           </div>
           <div className="flex flex-col leading-tight">
             <div className="text-2xl mt-1 flex items-center">
-              <span className="text-gray-700 mr-3">{matchee?.name}</span>
+              <span className="text-light-1 mr-3">{matchee?.name}</span>
             </div>
-            <span className="text-lg text-gray-600">
+            <span className="text-lg text-gray-400">
               Likes{" "}
               {matchee.cuisines.map((cuisine, indx) => (
                 <span key={indx}>
@@ -70,10 +73,10 @@ const Chat = ({ user, userId, chatRoomId }: Props) => {
           </div>
         </Link>
       </div>
-      <h2 className="text-sm font-light text-gray-800 italic">
+      <h2 className="text-sm font-light text-light-2 italic">
         🎉 You've matched with these restaurants!
       </h2>
-      <div className="flex overflow-x-scroll max-w-full gap-4">
+      <div className="flex overflow-x-scroll max-w-full gap-4 custom-scrollbar">
         {obj?.chatRoom?.commonRestaurants?.map((restaurant) => (
           <article className="relative flex flex-col justify-end overflow-hidden rounded-2xl p-4 pt-40 min-w-48 max-h-24">
             <img
@@ -120,7 +123,7 @@ const Chat = ({ user, userId, chatRoomId }: Props) => {
                 <div className="flex items-end">
                   <div className="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start">
                     <div>
-                      <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-300 text-gray-600">
+                      <span className="px-4 py-2 rounded-lg inline-block rounded-bl-none bg-gray-800 text-gray-200">
                         {message.body}
                       </span>
                     </div>
@@ -136,25 +139,25 @@ const Chat = ({ user, userId, chatRoomId }: Props) => {
           )
         ) : (
           <>
-            <h2 className="text-center text-heading4-medium m-0">
+            <h2 className="text-center text-heading4-medium m-0 text-light-1">
               Chat is empty
             </h2>
-            <p className="text-center text-small-regular text-light-4 !m-0">
+            <p className="text-center text-small-regular text-light-3 !m-0">
               Be the one to break the ice
             </p>
           </>
         )}
       </div>
-      <div className="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
+      <div className="border-t-2 border-gray-800 px-4 pt-4 mb-2 sm:mb-0">
         <div className="relative flex">
           <span className="absolute inset-y-0 flex items-center">
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
+              className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-light-1 hover:bg-gray-300 focus:outline-none"
             >
               <svg
-                className="h-6 w-6 text-gray-600"
-                fill="#000000"
+                className="h-6 w-6 text-light-1"
+                fill="#FFFFFF"
                 height="200px"
                 width="200px"
                 version="1.1"
@@ -203,13 +206,13 @@ const Chat = ({ user, userId, chatRoomId }: Props) => {
                 setNewMessageText(text);
               }}
               placeholder="Write a message…"
-              className="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3"
+              className="w-full focus:outline-none focus:placeholder-gray-400 text-light-1 placeholder-gray-400 pl-12 bg-gray-700 rounded-md py-3"
             />
           </form>
           <div className="absolute right-0 items-center inset-y-0 hidden sm:flex">
             <button
               type="button"
-              className="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-black bg-blue-500 hover:bg-blue-400 focus:outline-none"
+              className="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-light-1 bg-blue-500 hover:bg-blue-400 focus:outline-none"
             >
               <span className="font-bold">Send</span>
               <svg

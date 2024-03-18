@@ -12,7 +12,7 @@ const RightSidebar = () => {
   return (
     <section className="customer-scrollbar rightsidebar max-w-sm">
       <div className="flex gap-4 flex-col flex-1 justify-start">
-        <h3 className="text-heading4-medium text-dark-1">
+        <h3 className="text-heading4-medium text-light-1">
           Places you may like
         </h3>
         <ul className="flex flex-col gap-4 h-full justify-center">
@@ -21,7 +21,7 @@ const RightSidebar = () => {
               <a
                 target="_blank"
                 href={restaurant.url}
-                className="flex items-center gap-4 cursor-pointer hover:bg-slate-100 rounded-md"
+                className="flex items-center gap-4 cursor-pointer hover:bg-gray-800 rounded-md"
               >
                 <Image
                   className="w-10 h-10 rounded-full object-cover min-w-10 min-h-10"
@@ -30,11 +30,11 @@ const RightSidebar = () => {
                   width={40}
                   height={40}
                 />
-                <div className="font-medium dark:text-white">
+                <div className="font-medium text-white">
                   <div className="truncate ... overflow-hidden">
                     {restaurant.name}
                   </div>
-                  <div className=" text-gray-500 dark:text-gray-400 text-small-medium">
+                  <div className=" text-gray-400 text-small-medium">
                     {restaurant?.location?.display_address[0]}{" "}
                     {restaurant?.location?.display_address[1]}
                   </div>
@@ -45,7 +45,7 @@ const RightSidebar = () => {
         </ul>
       </div>
       <div className="flex flex-col flex-1 justify-center gap-4">
-        <h3 className="text-heading4-medium text-dark-1">
+        <h3 className="text-heading4-medium text-light-1">
           Foodies you may know
         </h3>
         <ul className="flex flex-col gap-4 h-full justify-center">
@@ -53,7 +53,7 @@ const RightSidebar = () => {
             <li key={user.alias}>
               <Link
                 href={`/profile/${user._id}`}
-                className="flex items-center gap-4 cursor-pointer hover:bg-slate-100 rounded-md"
+                className="flex items-center gap-4 cursor-pointer hover:bg-gray-800 rounded-md"
               >
                 <Image
                   className="w-10 h-10 rounded-full object-cover min-w-10 min-h-10"
@@ -62,11 +62,11 @@ const RightSidebar = () => {
                   width={40}
                   height={40}
                 />
-                <div className="font-medium dark:text-white">
+                <div className="font-medium text-white">
                   <div className="truncate ... overflow-hidden">
                     {user.name}
                   </div>
-                  <div className=" text-gray-500 dark:text-gray-400 text-small-medium">
+                  <div className=" text-gray-400  text-small-medium">
                     Likes{" "}
                     {user.cuisines.map((cuisine, indx) => (
                       <span key={indx}>

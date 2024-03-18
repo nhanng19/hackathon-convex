@@ -7,7 +7,7 @@ import {
   Marker,
   DirectionsRenderer,
 } from "@react-google-maps/api";
-
+import { mapStyles } from "@/constants";
 interface Position {
   lat: any;
   lng: any;
@@ -46,6 +46,12 @@ const MapComponent = (props: MapProps) => {
         center={defaultCenter}
         zoom={defaultZoom}
         mapContainerStyle={{ width: "100%", height: "100%", flex: "1" }}
+        options={{
+          styles: mapStyles,
+        }}
+        // options={{
+        //   mapId: "d477557659ce5578",
+        // }}
       >
         {directionsResponse && (
           <DirectionsRenderer directions={directionsResponse} />

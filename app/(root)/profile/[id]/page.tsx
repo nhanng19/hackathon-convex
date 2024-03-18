@@ -6,6 +6,7 @@ import { useQuery } from "convex/react";
 import Image from "next/image";
 import { useAction } from "convex/react";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 const ProfilePage = (props: any) => {
   const userId = props.params.id;
   const user = useQuery(api.user.getSingleUser, {
@@ -31,11 +32,11 @@ const ProfilePage = (props: any) => {
   return (
     <section className="main-container">
       <div className="w-full h-full max-w-4xl">
-        <main className="max-w-4xl flex items-center h-auto lg:h-screen flex-wrap mx-auto my-32 lg:my-0">
+        <main className="flex items-center h-auto flex-wrap mx-auto my-32 lg:my-0">
           {/* Main Col */}
           <div
             id="profile"
-            className="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-white opacity-75 mx-6 lg:mx-0"
+            className="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg lg:rounded-r-none shadow-2xl bg-gray-900 mx-6 lg:mx-0"
           >
             <div className="p-4 md:p-12 text-center lg:text-left">
               {/* Image for mobile view */}
@@ -45,39 +46,58 @@ const ProfilePage = (props: any) => {
                   backgroundImage: `url(${user?.imageUrl})`,
                 }}
               ></div>
-              <h1 className="text-3x1 font-bold pt-8 lg:pt-0">{user?.name}</h1>
-              <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-orange-400 opacity-25"></div>
-              <p className="pt-4 text-base font-bold flex items-center justify-center lg:justify-start">
+              <div className="flex justify-between items-center">
+            <h1 className="text-3x1 font-bold pt-8 lg:pt-0 text-light-1">
+                {user?.name}
+              </h1>
+                <Link href="/onboard">
+                  <div className="flex cursor-pointer gap-3 rounded-lg bg-dark-3 px-4 py-2">
+                    <Image
+                      src="/assets/edit.svg"
+                      alt="logout"
+                      width={16}
+                      height={16}
+                    />
+
+                    <p className="text-light-2 max-sm:hidden">Edit</p>
+                  </div>
+                </Link>
+              </div>
+
+              <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-gray-700 opacity-25"></div>
+              <div className="pt-4 text-base  flex items-center justify-center lg:justify-start text-gray-300 gap-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="#000000"
+                  stroke="#ffffff"
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 >
                   <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
                 </svg>
-                {"likes "}
-                {user?.cuisines?.map((cuisine, indx) => (
-                  <span key={indx}>
-                    {indx < user?.cuisines?.length - 1
-                      ? ` ${cuisine}  `
-                      : ` and ${cuisine} cuisines`}
-                  </span>
-                ))}
-              </p>
-              <p className="pt-2 text-gray-600 text-xs lg:text-sm flex items-center justify-center lg:justify-start">
+                <div>
+                  Likes{" "}
+                  {user?.cuisines?.map((cuisine, indx) => (
+                    <span key={indx}>
+                      {indx < user.cuisines.length - 1
+                        ? `${cuisine}, `
+                        : `and ${cuisine} cuisines`}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <p className="pt-2 text-gray-300 gap-2 text-xs lg:text-sm flex items-center justify-center lg:justify-start">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
                   fill="none"
-                  stroke="#000000"
+                  stroke="#FFFFFF"
                   strokeWidth="2"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -87,15 +107,9 @@ const ProfilePage = (props: any) => {
                 </svg>
                 {city}
               </p>
-              <p className="pt-8 text-sm">
-                short description about yourself, what you do, what you like
+              <p className="pt-8 text-sm text-gray-400">
+                {user?.bio ? user?.bio : "No bio yet."}
               </p>
-              <div className="pt-12 pb-8">
-                <button className="bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded-full">
-                  Message
-                </button>
-              </div>
-
               <div className="mt-6 pb-16 lg:pb-0 w-4/5 lg:w-full mx-auto flex flex-wrap items-center justify-between">
                 <a
                   className="link"
@@ -103,7 +117,7 @@ const ProfilePage = (props: any) => {
                   data-tippy-content="@facebook_handle"
                 >
                   <svg
-                    className="h-6 fill-current text-gray-600 hover:text-orange-700"
+                    className="h-6 fill-current text-gray-600 hover:text-gray-500"
                     role="img"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +132,7 @@ const ProfilePage = (props: any) => {
                   data-tippy-content="@twitter_handle"
                 >
                   <svg
-                    className="h-6 fill-current text-gray-600 hover:text-orange-700"
+                    className="h-6 fill-current text-gray-600 hover:text-gray-500"
                     role="img"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
@@ -133,7 +147,7 @@ const ProfilePage = (props: any) => {
                   data-tippy-content="@github_handle"
                 >
                   <svg
-                    className="h-6 fill-current text-gray-600 hover:text-orange-700"
+                    className="h-6 fill-current text-gray-600 hover:text-gray-500"
                     role="img"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
@@ -148,7 +162,7 @@ const ProfilePage = (props: any) => {
                   data-tippy-content="@instagram_handle"
                 >
                   <svg
-                    className="h-6 fill-current text-gray-600 hover:text-orange-700"
+                    className="h-6 fill-current text-gray-600 hover:text-gray-500"
                     role="img"
                     viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg"
@@ -163,7 +177,7 @@ const ProfilePage = (props: any) => {
                   data-tippy-content="@youtube_handle"
                 >
                   <svg
-                    className="h-6 fill-current text-gray-600 hover:text-orange-700"
+                    className="h-6 fill-current text-gray-600 hover:text-gray-500"
                     role="img"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
@@ -175,7 +189,6 @@ const ProfilePage = (props: any) => {
               </div>
             </div>
           </div>
-
           {/* Img Col */}
           <div className="w-full lg:w-2/5">
             {/* <!-- Big profile image for side bar (desktop) --> */}
@@ -186,32 +199,59 @@ const ProfilePage = (props: any) => {
               width={1048}
               height={1048}
             />
+          </div>{" "}
+          <h1 className="font-bold">{user?.name} Favorite Places!</h1>
+          <div className="grid-cols-1 sm:grid md:grid-cols-3 gap-6">
+            {user?.likedRestaurants?.map((restaurant) => (
+              <div
+                key={restaurant?.alias}
+                className="max-w-sm  rounded-lg shadow bg-gray-800 border-gray-700"
+              >
+                <a href="#">
+                  <img
+                    className="rounded-t-lg h-32 w-full object-cover"
+                    src={restaurant?.image_url}
+                    alt=""
+                  />
+                </a>
+                <div className="p-5">
+                  <a href="#">
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight  text-white">
+                      {restaurant.name}
+                    </h5>
+                  </a>
+                  <p className="mb-3 font-normal text-gray-400">
+                    {" "}
+                    {restaurant?.location?.display_address[0]}{" "}
+                    {restaurant?.location?.display_address[1]}
+                  </p>
+                  <a
+                    href="#"
+                    className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
+                  >
+                    See on Yelp
+                    <svg
+                      className="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 14 10"
+                    >
+                      <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M1 5h12m0 0L9 1m4 4L9 9"
+                      />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            ))}
           </div>
         </main>
       </div>
-      <h1 className="font-bold">{user?.name} Favorite Places!</h1>
-      <div className="grid-cols-1 sm:grid md:grid-cols-3 gap-6">
-  {user?.likedRestaurants?.map((restaurant) => (
-    <div key={restaurant.alias} className="flex flex-col rounded-lg bg-white text-surface shadow-secondary-1 dark:bg-surface-dark dark:text-white sm:shrink-0 sm:grow sm:basis-0 shadow-md transition transform hover:scale-105 h-full">
-      <a href="#" className="h-full flex flex-col justify-between">
-        <div className="relative">
-          <img
-            className="rounded-t-lg w-full h-32 object-cover"
-            src={restaurant.image_url}
-            alt="restaurant img"
-          />
-        </div>
-        <div className="p-4">
-          <div className="text-xl font-medium leading-tight">{restaurant.name}</div>
-          <div className="text-base">{restaurant?.location?.display_address[0]} {restaurant?.location?.display_address[1]}</div>
-        </div>
-      </a>
-    </div>
-  ))}
-</div>
-
-
-
     </section>
   );
 };

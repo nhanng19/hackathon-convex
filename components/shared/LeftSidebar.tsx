@@ -11,8 +11,8 @@ const LeftSidebar = () => {
   const router = useRouter();
   const pathname = usePathname();
   const userId = useStoreUserEffect();
-  
-  if (!userId) return null
+
+  if (!userId) return null;
 
   return (
     <section className="custom-scrollbar leftsidebar">
@@ -28,8 +28,8 @@ const LeftSidebar = () => {
               href={link.route}
               className={`leftsidebar_link ${
                 isActive
-                  ? "bg-slate-200 hover:bg-slate-200"
-                  : "hover:bg-slate-100"
+                  ? "bg-[#3e567c] hover:bg-[#3e567c]"
+                  : "hover:bg-slate-700"
               }`}
             >
               <Image
@@ -38,7 +38,7 @@ const LeftSidebar = () => {
                 width={32}
                 height={32}
               />
-              <p className="text-dark-1 max-lg:hidden flex items-center">
+              <p className="text-light-1 max-lg:hidden flex items-center">
                 {link.label}
               </p>
             </Link>
@@ -50,13 +50,12 @@ const LeftSidebar = () => {
           <SignOutButton signOutCallback={() => router.push("/")}>
             <div className="flex cursor-pointer gap-4 p-4">
               <Image
-                className="rotate-90"
                 src="/assets/logout.svg"
                 alt="logoutt"
                 width={32}
                 height={32}
               />
-              <p className="text-dark-2 max-lg:hidden flex items-center">
+              <p className="text-light-2 max-lg:hidden flex items-center">
                 Logout
               </p>
             </div>

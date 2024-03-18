@@ -23,13 +23,12 @@ export default function Home() {
     <section className="main-container">
       <div className="w-full h-full max-w-4xl">
         <main>
-          <section className="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
-            <div className="max-w-2xl mx-auto px-4">
-              <CreateForm userId={userId} />
-              {posts?.map((post) => (
-                <PostCard post={post} />))}
-            </div>
-          </section>
+          <CreateForm userId={userId} />
+          <div className="flex flex-col gap-4">
+            {posts?.map((post) => (
+              <PostCard post={post} />
+            ))}
+          </div>
         </main>
       </div>
     </section>

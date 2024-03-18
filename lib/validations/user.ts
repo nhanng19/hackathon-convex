@@ -6,4 +6,5 @@ export const UserValidation = z.object({
     message: "Choose at least 1 cuisine.",
   }),
   maxRadius: z.any(),
+  bio: z.string().min(3).max(30),
 });
