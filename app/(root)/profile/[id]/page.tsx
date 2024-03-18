@@ -205,7 +205,7 @@ const ProfilePage = (props: any) => {
             />
           </div>{" "}
           <h1 className="font-bold">{user?.name} Favorite Places!</h1>
-          <div className="grid-cols-1 sm:grid md:grid-cols-3 gap-6">
+          <div className="grid-cols-1 sm:grid md:grid-cols-3 gap-6 m-auto">
             {user?.likedRestaurants?.map((restaurant: any) => (
               <div
                 key={restaurant?.alias}

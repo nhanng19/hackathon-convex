@@ -6,12 +6,13 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { SignOutButton, SignedIn, useAuth } from "@clerk/nextjs";
 import useStoreUserEffect from "@/hooks/useStoreUser";
+import useNotifications from "@/hooks/useNotifications";
 
 const LeftSidebar = () => {
   const router = useRouter();
   const pathname = usePathname();
   const userId = useStoreUserEffect();
-
+  const notifications = useNotifications();
   if (!userId) return null;
 
   return (

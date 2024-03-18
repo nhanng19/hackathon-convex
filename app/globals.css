@@ -67,7 +67,7 @@ html {
   }
 
   .bottombar {
-    @apply fixed bottom-0 z-10 w-full rounded-t-3xl bg-white border-t-2 border-t-gray-300 p-4 backdrop-blur-lg xs:px-7 md:hidden;
+    @apply fixed bottom-0 z-10 w-full rounded-t-3xl bg-slate-950 border-t-2 border-t-gray-900 p-4 backdrop-blur-lg xs:px-7 md:hidden;
   }
 
   .bottombar_container {
@@ -192,4 +192,10 @@ html::-webkit-scrollbar-thumb {
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: #ffffff;
   border-radius: 5px;
+}
+
+[data-sonner-toast] [data-button] {
+ background: hsl(150, 100%, 6%)!important;
+ color: hsl(150, 86%, 65%) !important;
+ border: 1px solid hsl(147, 100%, 12%) !important
 }

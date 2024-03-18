@@ -20,7 +20,7 @@ const Bottombar = () => {
             <Link
               key={link.label}
               href={link.route}
-              className={`bottombar_link ${isActive && "bg-gray-200"}`}
+              className={`bottombar_link ${isActive && "bg-gray-800"}`}
             >
               <Image
                 src={link.imgURL}
@@ -28,7 +28,7 @@ const Bottombar = () => {
                 width={24}
                 height={24}
               />
-              <p className="text-subtle-medium text-dark-1 max-sm:hidden">
+              <p className="text-subtle-medium text-light-1 max-sm:hidden">
                 {link.label.split(/\s+/)[0]}
               </p>
             </Link>

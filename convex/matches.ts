@@ -8,6 +8,16 @@ import { ConvexError, v } from "convex/values";
 import { internal } from "./_generated/api";
 import { mutation } from "./_generated/server";
 import { Id } from "./_generated/dataModel";
+
+
+export const getMatches = query({
+  args: {},
+  async handler(ctx, args) {
+    const matches = await ctx.db.query("matches").collect();
+    return matches;
+  },
+});
+
 export const getAllMatches = internalQuery({
   args: {},
   async handler(ctx, args) {

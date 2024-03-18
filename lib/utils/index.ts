@@ -96,3 +96,10 @@ export function formatDateString(dateString: string) {
 
   return `${time} - ${formattedDate}`;
 }
+
+export function determineNotifications(epochTime: number) {
+  const currentTime = Math.floor(Date.now() / 1000);
+  const timeDifference = currentTime - epochTime / 1000;
+  console.log(timeDifference)
+  return timeDifference <= 10 ? true : false
+}

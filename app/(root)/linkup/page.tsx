@@ -68,8 +68,8 @@ export default function LinkUp() {
   return (
     <section className="main-container p-0">
       <div className="w-full h-full">
-        <div className="relative flex h-full w-full items-center justify-center overflow-hidden text-textGrey">
-          <div className="flex-1 flex justify-center items-center shadow-2xl z-20 w-full h-full">
+        <div className="flex-col md:flex-row relative flex h-full w-full items-center justify-center overflow-hidden text-textGrey">
+          <div className="flex-none md:flex-1 flex justify-center items-center shadow-2xl z-20 w-full h-full">
             <AnimatePresence>
               {restaurants?.length ? (
                 restaurants.map((card, indx) => (

@@ -39,7 +39,7 @@ export const store = mutation({
     return await ctx.db.insert("user", {
       name: identity.name!,
       onboarded: false,
-      likedRestaurant: [],
+      likedRestaurants: [],
       tokenIdentifier: identity.tokenIdentifier,
     });
   },
