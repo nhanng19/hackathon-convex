@@ -38,7 +38,7 @@ interface Props {
     firstName: string;
     lastName: string;
     emailAddress: string;
-    imageUrl: string;
+    imageUrl: string | undefined;
     bio: string;
   };
 

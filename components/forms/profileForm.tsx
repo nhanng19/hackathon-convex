@@ -15,6 +15,7 @@ const ProfileForm = async() => {
     lastName: userCurrent?.lastName || "",
     emailAddress: userCurrent?.emailAddresses[0].emailAddress || "",
     imageUrl: userCurrent?.imageUrl,
+    bio: "",
   };
 
   return (

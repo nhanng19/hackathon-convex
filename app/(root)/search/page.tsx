@@ -78,15 +78,14 @@ const Search = () => {
           {users.length > 0 && (
             <div className="flex flex-col items-center gap-2 cursor-pointer">
               {users
-                ?.filter((user) =>
+                ?.filter((user: any) =>
                   user.name.toLowerCase().includes(filter.toLowerCase())
                 )
-                ?.map((user) => (
+                ?.map((user: any) => (
                   <Link
                     key={user._id}
                     href={`/profile/${user._id}`}
                     className="h-full flex justify-start items-center border-radius p-2 m-2 w-full rounded-lg pl-8 gap-4 bg-gray-900 hover:bg-gray-700"
-                    key={user._id}
                   >
                     <Image
                       className="w-10 h-10 rounded-full object-cover min-w-10 min-h-10"
@@ -99,7 +98,7 @@ const Search = () => {
                       <h5 className="font-medium text-white">{user.name}</h5>
                       <div className=" text-gray-400  text-small-medium">
                         Likes{" "}
-                        {user.cuisines.map((cuisine, indx) => (
+                        {user.cuisines.map((cuisine : any, indx: number) => (
                           <span key={indx}>
                             {indx < user.cuisines.length - 1
                               ? `${cuisine}, `

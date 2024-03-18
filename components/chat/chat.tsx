@@ -62,7 +62,7 @@ const Chat = ({ user, userId, chatRoomId }: Props) => {
             </div>
             <span className="text-lg text-gray-400">
               Likes{" "}
-              {matchee.cuisines.map((cuisine, indx) => (
+              {matchee.cuisines.map((cuisine : any, indx : number) => (
                 <span key={indx}>
                   {indx < user.cuisines.length - 1
                     ? `${cuisine}, `
@@ -77,7 +77,7 @@ const Chat = ({ user, userId, chatRoomId }: Props) => {
         🎉 You've matched with these restaurants!
       </h2>
       <div className="flex overflow-x-scroll max-w-full gap-4 custom-scrollbar">
-        {obj?.chatRoom?.commonRestaurants?.map((restaurant) => (
+        {obj?.chatRoom?.commonRestaurants?.map((restaurant : any) => (
           <article className="relative flex flex-col justify-end overflow-hidden rounded-2xl p-4 pt-40 min-w-48 max-h-24">
             <img
               src={restaurant.image_url}
@@ -100,7 +100,7 @@ const Chat = ({ user, userId, chatRoomId }: Props) => {
         className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
       >
         {obj?.chatRoom?.messages.length > 0 ? (
-          obj?.chatRoom?.messages?.map((message) =>
+          obj?.chatRoom?.messages?.map((message : any) =>
             message?.userId == userId ? (
               <div className="chat-message">
                 <div className="flex items-end justify-end">

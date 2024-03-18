@@ -9,6 +9,7 @@ export default async function Onboard() {
     lastName: user?.lastName || "",
     emailAddress: user?.emailAddresses[0].emailAddress || "",
     imageUrl: user?.imageUrl,
+    bio: ""
   };
 
   return (

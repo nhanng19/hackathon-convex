@@ -48,7 +48,7 @@ export default function Reviews(props: any) {
           <Typography variant={"h4"} color="white">
             Reviews:
           </Typography>
-          {reviews?.map((review) => {
+          {reviews?.map((review : any) => {
             return (
               <div className="w-full mx-auto rounded-lg bg-gray-900  p-5 text-light-2 font-light mt-6">
                 <div className="w-full flex mb-4 items-center">

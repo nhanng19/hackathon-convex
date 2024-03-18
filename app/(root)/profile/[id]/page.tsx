@@ -85,7 +85,7 @@ const ProfilePage = (props: any) => {
                 </svg>
                 <div>
                   Likes{" "}
-                  {user?.cuisines?.map((cuisine, indx) => (
+                  {user?.cuisines?.map((cuisine: any, indx: number) => (
                     <span key={indx}>
                       {indx < user.cuisines.length - 1
                         ? `${cuisine}, `
@@ -206,7 +206,7 @@ const ProfilePage = (props: any) => {
           </div>{" "}
           <h1 className="font-bold">{user?.name} Favorite Places!</h1>
           <div className="grid-cols-1 sm:grid md:grid-cols-3 gap-6">
-            {user?.likedRestaurants?.map((restaurant) => (
+            {user?.likedRestaurants?.map((restaurant: any) => (
               <div
                 key={restaurant?.alias}
                 className="max-w-sm  rounded-lg shadow bg-gray-800 border-gray-700"

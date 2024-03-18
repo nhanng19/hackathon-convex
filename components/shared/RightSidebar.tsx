@@ -68,7 +68,7 @@ const RightSidebar = () => {
                   </div>
                   <div className=" text-gray-400  text-small-medium">
                     Likes{" "}
-                    {user.cuisines.map((cuisine, indx) => (
+                    {user.cuisines.map((cuisine : any, indx: number) => (
                       <span key={indx}>
                         {indx < user.cuisines.length - 1
                           ? `${cuisine}, `

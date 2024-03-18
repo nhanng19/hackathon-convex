@@ -36,7 +36,7 @@ export const getBorderStyle = (exitX: number) => {
   };
 
 export const getMatchee = (match: any, userId : any) => {
-  const matchee = match?.pair.filter((user) => user.id !== userId);
+  const matchee = match?.pair.filter((user: any) => user.id !== userId);
   return {...match, matchee};
 }
 

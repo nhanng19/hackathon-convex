@@ -52,5 +52,5 @@ export type CardProps = {
 export type SwipeButtonProps = {
   exit: (value: SetStateAction<number>) => void;
   removeCard: (id: string, action: 'right' | 'left') => void;
-  id: number;
+  id: string;
 };
