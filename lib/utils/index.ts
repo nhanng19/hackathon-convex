@@ -35,9 +35,9 @@ export const getBorderStyle = (exitX: number) => {
     }
   };
 
-export const getMatchee = (pair : any[], userId : Id<"user"> | null) => {
-  const matchee = pair.filter((user) => user.id !== userId);
-  return matchee[0];
+export const getMatchee = (match: any, userId : any) => {
+  const matchee = match?.pair.filter((user) => user.id !== userId);
+  return {...match, matchee};
 }
 
 export const  xorHash = (str1: any, str2: any) => {
@@ -59,4 +59,23 @@ export function isUserOnline(epochTime: number) {
   const currentTime = Date.now();
   const timeDifference = currentTime - epochTime * 1000;
   return timeDifference <= 10000;
+}
+
+export function getMessageTimeDifference(epochTime: number) {
+  const currentTime = Math.floor(Date.now() / 1000);
+  const timeDifference = currentTime - epochTime;
+  if (timeDifference <= 30) {
+    return "Just now";
+  } else if (timeDifference < 60) {
+    return timeDifference + " sec. ago";
+  } else if (timeDifference < 3600) {
+    const minutes = Math.floor(timeDifference / 60);
+    return minutes + " min. ago";
+  } else if (timeDifference < 86400) {
+    const hours = Math.floor(timeDifference / 3600);
+    return hours + " hr. ago";
+  } else {
+    const days = Math.floor(timeDifference / 86400);
+    return days + " day ago";
+  }
 }

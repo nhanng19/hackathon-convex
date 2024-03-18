@@ -2,6 +2,7 @@ import { CardProps } from "@/types";
 import { motion, PanInfo, useMotionValue, useTransform } from "framer-motion";
 import { useState } from "react";
 import { getBorderStyle } from "@/lib/utils";
+import SwipeButton from "./swipeButtons";
 const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
   const [exitX, setExitX] = useState(0);
   const x = useMotionValue(0);
@@ -172,6 +173,8 @@ const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
           </div>
         </motion.div>
       ) : null}
+
+      <SwipeButton exit={setExitX} removeCard={removeCard} id={data.id} />
     </>
   );
 };

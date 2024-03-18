@@ -7,13 +7,7 @@ import useStoreUserEffect from "@/hooks/useStoreUser";
 import { useQuery, useAction, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-import {
-  GoogleMap,
-  useLoadScript,
-  MarkerF,
-  Marker,
-} from "@react-google-maps/api";
-import styles from "./style.module.css";
+
 import MapComponent from "@/components/map/MapComponent";
 import { YelpBusiness } from "@/types";
 

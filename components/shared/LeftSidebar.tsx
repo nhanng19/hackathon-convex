@@ -5,21 +5,32 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { SignOutButton, SignedIn, useAuth } from "@clerk/nextjs";
+import useStoreUserEffect from "@/hooks/useStoreUser";
 
 const LeftSidebar = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const { userId } = useAuth();
+  const userId = useStoreUserEffect();
+  
+  if (!userId) return null
+
   return (
     <section className="custom-scrollbar leftsidebar">
       <div className="flex w-full flex-1 flex-col gap-2 px-6">
         {sidebarLinks.map((link) => {
-          const isActive = (pathname.includes(link.route) && link.route.length > 1) || pathname === link.route;
+          const isActive =
+            (pathname.includes(link.route) && link.route.length > 1) ||
+            pathname === link.route;
+          if (link.route === "/profile") link.route = `${link.route}/${userId}`;
           return (
             <Link
               key={link.label}
               href={link.route}
-              className={`leftsidebar_link ${isActive ? "bg-gray-200 hover:bg-gray-200" : "hover:bg-gray-100"}`}
+              className={`leftsidebar_link ${
+                isActive
+                  ? "bg-slate-200 hover:bg-slate-200"
+                  : "hover:bg-slate-100"
+              }`}
             >
               <Image
                 src={link.imgURL}
@@ -27,7 +38,9 @@ const LeftSidebar = () => {
                 width={32}
                 height={32}
               />
-              <p className="text-dark-1 max-lg:hidden flex items-center">{link.label}</p>
+              <p className="text-dark-1 max-lg:hidden flex items-center">
+                {link.label}
+              </p>
             </Link>
           );
         })}
@@ -43,7 +56,9 @@ const LeftSidebar = () => {
                 width={32}
                 height={32}
               />
-              <p className="text-dark-2 max-lg:hidden flex items-center">Logout</p>
+              <p className="text-dark-2 max-lg:hidden flex items-center">
+                Logout
+              </p>
             </div>
           </SignOutButton>
         </SignedIn>

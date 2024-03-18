@@ -7,8 +7,7 @@ import {
 import { ConvexError, v } from "convex/values";
 import { internal } from "./_generated/api";
 import { mutation } from "./_generated/server";
-
-
+import { Id } from "./_generated/dataModel";
 export const getAllMatches = internalQuery({
   args: {},
   async handler(ctx, args) {
@@ -33,6 +32,15 @@ export const determineMatches = internalMutation({
   },
 });
 
+export const updateMatch = internalMutation({
+  args: { id: v.any(), pair: v.any() },
+  async handler(ctx, args) {
+    console.log(args)
+    const { id, pair } = args;
+    return await ctx.db.patch(id, { pair });
+  },
+});
+
 export const pushMatches = internalAction({
   args: {},
   async handler(ctx, args) {
@@ -48,6 +56,11 @@ export const pushMatches = internalAction({
       if (!existingMatch) {
         await ctx.runMutation(internal.matches.insertSingleMatch, {
           match: matchData,
+        });
+      } else {
+        await ctx.runMutation(internal.matches.updateMatch, {
+          id: existingMatch._id,
+          pair: matchData.pair
         });
       }
     }
@@ -65,21 +78,21 @@ export const getUserMatches = query({
 });
 
 export const getChatRoom = query({
-  args: { hashKey: v.any() },
+  args: { hashKey: v.any(), userId: v.any() },
   handler: async (ctx, args) => {
-    const { hashKey } = args;
-    const data = await ctx.db
+    const { hashKey, userId } = args;
+    const chatRoom = await ctx.db
       .query("matches")
       .filter((q) => q.eq(q.field("hashKey"), hashKey))
       .unique();
-    return data;
+    const matcheeId = getMatcheeId(chatRoom, userId)
+    return { matcheeId, chatRoom };
   },
 });
 
-
 export const sendMessage = mutation({
-  args: { compositeKey: v.any(), message: v.any()},
-  handler: async (ctx, args) => { 
+  args: { compositeKey: v.any(), message: v.any() },
+  handler: async (ctx, args) => {
     const { compositeKey, message } = args;
     const data = await ctx.db
       .query("matches")
@@ -88,7 +101,7 @@ export const sendMessage = mutation({
     const messages = data.messages || [];
     messages.push(message);
     await ctx.db.patch(data._id, { messages: messages });
-  }
+  },
 });
 
 function findMatchingPairs(users: any) {
@@ -148,3 +161,8 @@ function xorHash(str1: string, str2: string) {
   }
   return hash;
 }
+
+export const getMatcheeId = (match: any, userId: any) => {
+  const matchee = match?.pair.filter((user: any) => user.id !== userId);
+  return matchee[0].id
+};

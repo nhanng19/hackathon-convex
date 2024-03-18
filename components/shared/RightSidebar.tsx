@@ -4,6 +4,8 @@ import useRestaurants from "@/hooks/useRestaurant";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import Image from "next/image";
+import Link from "next/link";
+
 const RightSidebar = () => {
   const restaurants = useRestaurants();
   const users = useQuery(api.user.getAllUsers);
@@ -19,7 +21,7 @@ const RightSidebar = () => {
               <a
                 target="_blank"
                 href={restaurant.url}
-                className="flex items-center gap-4 cursor-pointer"
+                className="flex items-center gap-4 cursor-pointer hover:bg-slate-100 rounded-md"
               >
                 <Image
                   className="w-10 h-10 rounded-full object-cover min-w-10 min-h-10"
@@ -49,10 +51,9 @@ const RightSidebar = () => {
         <ul className="flex flex-col gap-4 h-full justify-center">
           {users?.slice(0, 5).map((user) => (
             <li key={user.alias}>
-              <a
-                target="_blank"
-                href={user.url}
-                className="flex items-center gap-4 cursor-pointer"
+              <Link
+                href={`/profile/${user._id}`}
+                className="flex items-center gap-4 cursor-pointer hover:bg-slate-100 rounded-md"
               >
                 <Image
                   className="w-10 h-10 rounded-full object-cover min-w-10 min-h-10"
@@ -66,10 +67,17 @@ const RightSidebar = () => {
                     {user.name}
                   </div>
                   <div className=" text-gray-500 dark:text-gray-400 text-small-medium">
-                    Likes {user.cuisines.map((cuisine, indx) => <span key={indx}>{indx < user.cuisines.length - 1 ? `${cuisine}, ` : `and ${cuisine} cuisines`}</span>)}
+                    Likes{" "}
+                    {user.cuisines.map((cuisine, indx) => (
+                      <span key={indx}>
+                        {indx < user.cuisines.length - 1
+                          ? `${cuisine}, `
+                          : `and ${cuisine} cuisines`}
+                      </span>
+                    ))}
                   </div>
                 </div>
-              </a>
+              </Link>
             </li>
           ))}
         </ul>

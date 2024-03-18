@@ -8,7 +8,7 @@ import RightSidebar from "@/components/shared/RightSidebar";
 import Bottombar from "@/components/shared/Bottombar";
 import ConvexClientProvider from "@/components/shared/ConvexClientProvider";
 import { Toaster} from "sonner"
-import GlobalProvider from "@/components/shared/GlobalProvider";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -25,7 +25,6 @@ export default function RootLayout({
     
   return (
     <ConvexClientProvider>
-      <GlobalProvider>
       <html lang="en" suppressHydrationWarning={true}>
         <body className={inter.className}>
           <Topbar />
@@ -38,7 +37,6 @@ export default function RootLayout({
           <Bottombar />
         </body>
         </html>
-      </GlobalProvider>
     </ConvexClientProvider>
   );
 }

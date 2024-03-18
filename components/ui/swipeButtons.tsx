@@ -14,17 +14,11 @@ export default function SwipeButton({
     removeCard(id, action);
   };
   return (
-    <div className="flex items-center space-x-8 absolute top-10">
-      <button
-        onClick={() => handleSwipe('left')}
-        className="px-3 py-2 bg-teal-800 text-textGrey font-semibold rounded-md"
-      >
+    <div className="flex items-center space-x-8 absolute bottom-10">
+      <button onClick={() => handleSwipe("left")} className="key_button">
         Left
       </button>
-      <button
-        onClick={() => handleSwipe('right')}
-        className="px-3 py-2 bg-teal-800 text-textGrey font-semibold rounded-md"
-      >
+      <button onClick={() => handleSwipe("right")} className="key_button">
         Right
       </button>
     </div>

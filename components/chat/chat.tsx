@@ -6,6 +6,7 @@ import { useQuery, useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { getMatchee, isUserOnline } from "@/lib/utils";
+import Link from "next/link";
 interface Props {
   user: any;
   userId: Id<"user"> | null;
@@ -13,12 +14,14 @@ interface Props {
 }
 
 const Chat = ({ user, userId, chatRoomId }: Props) => {
-  const chatRoom = useQuery(api.matches.getChatRoom, { hashKey: chatRoomId });
-  const [matchee, setMatchee] = useState();
+  const obj = useQuery(api.matches.getChatRoom, { hashKey: chatRoomId, userId: userId });
   const [newMessageText, setNewMessageText] = useState("");
   const [isOnline, setIsOnline] = useState<boolean>();
   const sendMessage = useMutation(api.matches.sendMessage);
-  
+  const matchee = useQuery(api.user.getSingleUser, {
+    userId: obj?.matcheeId,
+  });
+  console.log(matchee)
   useEffect(() => { 
     setIsOnline(isUserOnline(user.lastSeenOn))
   }, [user])
@@ -30,27 +33,22 @@ const Chat = ({ user, userId, chatRoomId }: Props) => {
         behavior: "smooth",
       });
     }, 0);
-  }, [chatRoom]);
+  }, [obj?.chatRoom]);
 
-  useEffect(() => {
-    if (chatRoom) {
-      const matchee = getMatchee(chatRoom?.pair, userId);
-      setMatchee(matchee);
-    }
-  }, [chatRoom]);
+  if (!matchee) return null
 
   return (
-    <div className="justify-between gap-4 flex flex-col max-w-full w-[65%] float-right shadow-lg px-8 py-4 border border-light-2">
+    <>
       <div className="flex sm:items-center justify-between py-3 border-b-2 border-gray-200">
-        <div className="relative flex items-center space-x-4">
+        <Link href={`/profile/${matchee._id}`} className="relative flex items-center space-x-4 hover:bg-slate-100 w-full rounded-md">
           <div className="relative">
-            <span className={"absolute right-0 bottom-0" + ` ${isOnline ? "text-green-500" : "text-gray-500"}`}>
+            <span className={"absolute right-0 bottom-0 text-green-500"}>
               <svg width="20" height="20">
                 <circle cx="8" cy="8" r="8" fill="currentColor"></circle>
               </svg>
             </span>
             <img
-              src={matchee?.photo}
+              src={matchee?.imageUrl}
               alt=""
               className="w-10 sm:w-16 h-10 sm:h-16 rounded-full"
             />
@@ -59,13 +57,24 @@ const Chat = ({ user, userId, chatRoomId }: Props) => {
             <div className="text-2xl mt-1 flex items-center">
               <span className="text-gray-700 mr-3">{matchee?.name}</span>
             </div>
-            <span className="text-lg text-gray-600">Likes</span>
+            <span className="text-lg text-gray-600">
+              Likes{" "}
+              {matchee.cuisines.map((cuisine, indx) => (
+                <span key={indx}>
+                  {indx < user.cuisines.length - 1
+                    ? `${cuisine}, `
+                    : `and ${cuisine} cuisines`}
+                </span>
+              ))}
+            </span>
           </div>
-        </div>
+        </Link>
       </div>
-      <h2 className="text-sm">🎉 You've matched with these restaurants!</h2>
+      <h2 className="text-sm font-light text-gray-800 italic">
+        🎉 You've matched with these restaurants!
+      </h2>
       <div className="flex overflow-x-scroll max-w-full gap-4">
-        {chatRoom?.commonRestaurants?.map((restaurant) => (
+        {obj?.chatRoom?.commonRestaurants?.map((restaurant) => (
           <article className="relative flex flex-col justify-end overflow-hidden rounded-2xl p-4 pt-40 min-w-48 max-h-24">
             <img
               src={restaurant.image_url}
@@ -87,8 +96,8 @@ const Chat = ({ user, userId, chatRoomId }: Props) => {
         id="messages"
         className="flex flex-col space-y-4 p-3 overflow-y-auto scrollbar-thumb-blue scrollbar-thumb-rounded scrollbar-track-blue-lighter scrollbar-w-2 scrolling-touch"
       >
-        {chatRoom?.messages.length > 0 ? (
-          chatRoom?.messages?.map((message) =>
+        {obj?.chatRoom?.messages.length > 0 ? (
+          obj?.chatRoom?.messages?.map((message) =>
             message?.userId == userId ? (
               <div className="chat-message">
                 <div className="flex items-end justify-end">
@@ -117,7 +126,7 @@ const Chat = ({ user, userId, chatRoomId }: Props) => {
                     </div>
                   </div>
                   <img
-                    src={message.profilePhoto}
+                    src={matchee?.imageUrl}
                     alt="My profile"
                     className="w-6 h-6 rounded-full order-1"
                   />
@@ -144,18 +153,29 @@ const Chat = ({ user, userId, chatRoomId }: Props) => {
               className="inline-flex items-center justify-center rounded-full h-12 w-12 transition duration-500 ease-in-out text-gray-500 hover:bg-gray-300 focus:outline-none"
             >
               <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
                 className="h-6 w-6 text-gray-600"
+                fill="#000000"
+                height="200px"
+                width="200px"
+                version="1.1"
+                id="Capa_1"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 70.984 70.984"
               >
-                <path
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
-                ></path>
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  <g>
+                    <path d="M0.001,70.984l8.775-17.178c-4.05-5.766-6.184-12.52-6.184-19.611C2.592,15.34,17.932,0,36.788,0 s34.195,15.341,34.195,34.197c0,18.855-15.34,34.195-34.194,34.195c-7.094,0-13.848-2.134-19.612-6.184L0.001,70.984z M17.571,57.515l1,0.759c5.28,4.003,11.58,6.118,18.219,6.118c16.649,0,30.194-13.546,30.194-30.195 C66.984,17.546,53.438,4,36.789,4C20.139,4,6.593,17.545,6.593,34.195c0,6.636,2.116,12.937,6.118,18.219l0.758,1l-4.284,8.387 L17.571,57.515z"></path>{" "}
+                    <circle cx="53.745" cy="34.195" r="4.206"></circle>{" "}
+                    <circle cx="36.592" cy="34.195" r="4.206"></circle>{" "}
+                    <circle cx="19.435" cy="34.195" r="4.206"></circle>{" "}
+                  </g>
+                </g>
               </svg>
             </button>
           </span>
@@ -164,12 +184,13 @@ const Chat = ({ user, userId, chatRoomId }: Props) => {
             onSubmit={async (e) => {
               e.preventDefault();
               await sendMessage({
-                compositeKey: chatRoom.compositeKey,
+                compositeKey: obj?.chatRoom.compositeKey,
                 message: {
                   body: newMessageText,
                   author: user.name,
                   userId: userId,
                   profilePhoto: user.imageUrl,
+                  time: Math.floor(Date.now() / 1000),
                 },
               });
               setNewMessageText("");
@@ -203,7 +224,7 @@ const Chat = ({ user, userId, chatRoomId }: Props) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

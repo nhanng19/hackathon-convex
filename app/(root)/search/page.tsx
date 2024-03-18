@@ -84,8 +84,7 @@ const Search = () => {
                     )
                     ?.map((user) => (
                       <Link
-                        // href={`/profile/${user._id}`}
-                        href={`/profile`}
+                        href={`/profile/${user._id}`}
                         className="h-full flex justify-start items-center border border-radius p-2 m-2 w-full rounded-lg pl-8 gap-4"
                         key={user._id}
                       >
