@@ -26,6 +26,7 @@ const Matches = () => {
                     const lastMessage = messages[messages.length - 1];
                     return (
                       <button
+                        key={matchingUser.id}
                         onClick={() => {
                           setChatRoomId(xorHash(userId, matchingUser.id));
                           setMatchId(matchingUser.id);

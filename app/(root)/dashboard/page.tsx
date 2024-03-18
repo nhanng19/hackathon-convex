@@ -26,7 +26,7 @@ export default function Home() {
           <CreateForm userId={userId} />
           <div className="flex flex-col gap-4">
             {posts?.map((post) => (
-              <PostCard post={post} />
+              <PostCard key={post} post={post} />
             ))}
           </div>
         </main>

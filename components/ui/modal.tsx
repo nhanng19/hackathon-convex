@@ -50,7 +50,7 @@ export default function Reviews(props: any) {
           </Typography>
           {reviews?.map((review : any) => {
             return (
-              <div className="w-full mx-auto rounded-lg bg-gray-900  p-5 text-light-2 font-light mt-6">
+              <div key={review?.user?.id} className="w-full mx-auto rounded-lg bg-gray-900  p-5 text-light-2 font-light mt-6">
                 <div className="w-full flex mb-4 items-center">
                   <div className="overflow-hidden rounded-full w-10 h-10 bg-gray-50">
                     <img src={review.user.image_url} alt="" />
