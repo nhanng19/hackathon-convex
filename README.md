@@ -16,25 +16,25 @@ Finding a meal can be challenging, especially in a bustling city like Los Angele
 
 Fooder Dating operates like a dating app, allowing users to swipe through curated food options and matching them with potential dining partners who share similar tastes. Our platform aims to facilitate enjoyable dining experiences and meaningful social interactions centered around food preferences.
 
-![Matches](/assets/matches.png)
+![Matches](/assets/matches.PNG)
 
 ## ⚙️ How we built it
 
 We developed Fooder Dating using modern web technologies such as HTML5, CSS3, JavaScript, Next.js for frontend, and Convex for backend infrastructure. We leverage Google Maps API for location-based insights and Yelp API for restaurant data, enhancing the user experience with personalized recommendations and valuable information.
 
-![Profile](/assets/profile.png)
+![Profile](/assets/profile.PNG)
 
 ## 🧩 Challenges we ran into
 
 While achieving a cohesive user experience posed challenges, especially in balancing complex features and maintaining consistency, we've made significant progress. Collaborating closely and incorporating user feedback has been instrumental in our development journey.
 
-![Home](/assets/home.png)
+![Home](/assets/home.PNG)
 
 ## 🎉 Accomplishments that we're proud of
 
 We're proud to introduce a unique platform focused on connecting users through their culinary interests. Fooder Dating offers a refreshing approach to finding dining spots and meeting like-minded individuals, fostering a vibrant community around food exploration.
 
-![Swipe](/assets/swipe.png)
+![Swipe](/assets/swipe.PNG)
 
 ## 📚 What we learned
 
