@@ -18,6 +18,7 @@ import type * as crons from "../crons.js";
 import type * as feed from "../feed.js";
 import type * as location from "../location.js";
 import type * as matches from "../matches.js";
+import type * as post from "../post.js";
 import type * as user from "../user.js";
 import type * as yelp from "../yelp.js";
 
@@ -34,6 +35,7 @@ declare const fullApi: ApiFromModules<{
   feed: typeof feed;
   location: typeof location;
   matches: typeof matches;
+  post: typeof post;
   user: typeof user;
   yelp: typeof yelp;
 }>;
