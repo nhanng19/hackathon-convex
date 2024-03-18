@@ -7,7 +7,9 @@ import Image from "next/image";
 import { useAction } from "convex/react";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import useStoreUserEffect from "@/hooks/useStoreUser";
 const ProfilePage = (props: any) => {
+  const currentUser = useStoreUserEffect();
   const userId = props.params.id;
   const user = useQuery(api.user.getSingleUser, {
     userId: userId as Id<"user">,
@@ -47,21 +49,23 @@ const ProfilePage = (props: any) => {
                 }}
               ></div>
               <div className="flex justify-between items-center">
-            <h1 className="text-3x1 font-bold pt-8 lg:pt-0 text-light-1">
-                {user?.name}
-              </h1>
-                <Link href="/onboard">
-                  <div className="flex cursor-pointer gap-3 rounded-lg bg-dark-3 px-4 py-2">
-                    <Image
-                      src="/assets/edit.svg"
-                      alt="logout"
-                      width={16}
-                      height={16}
-                    />
+                <h1 className="text-3x1 font-bold pt-8 lg:pt-0 text-light-1">
+                  {user?.name}
+                </h1>
+                {userId === currentUser && (
+                  <Link href="/onboard">
+                    <div className="flex cursor-pointer gap-3 rounded-lg bg-dark-3 px-4 py-2">
+                      <Image
+                        src="/assets/edit.svg"
+                        alt="logout"
+                        width={16}
+                        height={16}
+                      />
 
-                    <p className="text-light-2 max-sm:hidden">Edit</p>
-                  </div>
-                </Link>
+                      <p className="text-light-2 max-sm:hidden">Edit</p>
+                    </div>
+                  </Link>
+                )}
               </div>
 
               <div className="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-gray-700 opacity-25"></div>
