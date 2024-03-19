@@ -10,7 +10,7 @@ const useNotifications = () => {
   useEffect(() => {
     if (matches) {
       for (const match of matches) {
-        if (determineNotifications(match)) {
+        if (determineNotifications(match._creationTime)) {
           toast.success("You've got a match! ❤️", {
             action: {
               label: "See match",

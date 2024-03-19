@@ -54,7 +54,7 @@ const Matches = () => {
                                     lastMessage?.time
                                   )}`
                                 : `New Match • ${getMessageTimeDifference(
-                                    match?._creationTime / 1000
+                                    match?._creationTime 
                                   )}`}
                             </div>
                           </div>

@@ -18,7 +18,6 @@ const useGetMatches = () => {
       for (const match of matches) {
         data.push(getMatchee(match, userId));
       }
-      // console.log(data)
       setMatchee(data);
     }
   }, [matches, userId]);

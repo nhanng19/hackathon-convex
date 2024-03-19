@@ -98,9 +98,9 @@ const Search = () => {
                       <h5 className="font-medium text-white">{user.name}</h5>
                       <div className=" text-gray-400  text-small-medium">
                         Likes{" "}
-                        {user.cuisines.map((cuisine : any, indx: number) => (
+                        {user?.cuisines?.map((cuisine : any, indx: number) => (
                           <span key={indx}>
-                            {indx < user.cuisines.length - 1
+                            {indx < user?.cuisines?.length - 1
                               ? `${cuisine}, `
                               : `and ${cuisine} cuisines`}
                           </span>
