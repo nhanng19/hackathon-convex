@@ -204,8 +204,7 @@ const ProfilePage = (props: any) => {
               height={1048}
             />
           </div>{" "}
-          <h1 className="font-bold">{user?.name} Favorite Places!</h1>
-          <div className="grid-cols-1 sm:grid md:grid-cols-3 gap-6 m-auto">
+          <div className="grid-cols-1 sm:grid md:grid-cols-3 gap-6 mx-auto mt-4">
             {user?.likedRestaurants?.map((restaurant: any) => (
               <div
                 key={restaurant?.alias}
@@ -230,7 +229,8 @@ const ProfilePage = (props: any) => {
                     {restaurant?.location?.display_address[1]}
                   </p>
                   <a
-                    href="#"
+                    href={restaurant?.url}
+                    target="_blank"
                     className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-gray-900 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
                   >
                     See on Yelp

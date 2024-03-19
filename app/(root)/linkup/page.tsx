@@ -10,6 +10,7 @@ import { Id } from "@/convex/_generated/dataModel";
 
 import MapComponent from "@/components/map/MapComponent";
 import { YelpBusiness } from "@/types";
+import { Skeleton } from "@mui/material";
 
 export default function LinkUp() {
   const userId = useStoreUserEffect();
@@ -82,11 +83,12 @@ export default function LinkUp() {
                   />
                 ))
               ) : (
-                <h2 className="absolute z-10 self-center text-center text-2xl font-bold text-textGrey ">
-                  Excessive swiping can be injurious to health!
-                  <br />
-                  Come back tomorrow for more
-                </h2>
+                <div className="flex flex-col gap-4 min-w-40">
+                    <Skeleton variant="text" sx={{ fontSize: "1rem", width: "100%" }} />
+                  <Skeleton variant="circular" width={40} height={40} />
+                  <Skeleton variant="rectangular" className="w-full"/>
+                  <Skeleton variant="rounded" width={210} height={60} />
+                </div>
               )}
             </AnimatePresence>
           </div>

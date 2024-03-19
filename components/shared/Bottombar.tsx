@@ -5,10 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { SignOutButton, SignedIn } from "@clerk/nextjs";
+import useStoreUserEffect from "@/hooks/useStoreUser";
 
 const Bottombar = () => {
   const router = useRouter();
   const pathname = usePathname();
+  const userId = useStoreUserEffect();
+  if (!userId) return null;
+
   return (
     <section className="bottombar">
       <div className="bottombar_container">
@@ -16,6 +20,7 @@ const Bottombar = () => {
           const isActive =
             (pathname.includes(link.route) && link.route.length > 1) ||
             pathname === link.route;
+          if (link.route === "/profile") link.route = `${link.route}/${userId}`;
           return (
             <Link
               key={link.label}

@@ -7,8 +7,11 @@ import LeftSidebar from "@/components/shared/LeftSidebar";
 import RightSidebar from "@/components/shared/RightSidebar";
 import Bottombar from "@/components/shared/Bottombar";
 import ConvexClientProvider from "@/components/shared/ConvexClientProvider";
-import { Toaster} from "sonner"
+import { Toaster } from "sonner";
 import MatchIcon from "@/components/cards/MathIcon";
+import GlobalProvider from "@/components/shared/GlobalProvider";
+import { Global } from "@emotion/react";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -20,25 +23,31 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-  }) {
-  
-    
+}) {
   return (
     <ConvexClientProvider>
-      <html lang="en" suppressHydrationWarning={true}>
-        <body className={inter.className}>
-          <Topbar />
-          <Toaster richColors closeButton theme="dark" position="top-center" icons={{
-            success: <MatchIcon />
-          }} />
-          <main className="flex flex-row">
-            <LeftSidebar />
-            {children}
-            <RightSidebar />
-          </main>
-          <Bottombar />
-        </body>
+      <GlobalProvider>
+        <html lang="en" suppressHydrationWarning={true}>
+          <body className={inter.className}>
+            <Topbar />
+            <Toaster
+              richColors
+              closeButton
+              theme="dark"
+              position="top-center"
+              icons={{
+                success: <MatchIcon />,
+              }}
+            />
+            <main className="flex flex-row">
+              <LeftSidebar />
+              {children}
+              <RightSidebar />
+            </main>
+            <Bottombar />
+          </body>
         </html>
+      </GlobalProvider>
     </ConvexClientProvider>
   );
 }

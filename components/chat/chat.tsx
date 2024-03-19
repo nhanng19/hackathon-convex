@@ -16,15 +16,11 @@ interface Props {
 const Chat = ({ user, userId, chatRoomId }: Props) => {
   const obj = useQuery(api.matches.getChatRoom, { hashKey: chatRoomId, userId: userId });
   const [newMessageText, setNewMessageText] = useState("");
-  const [isOnline, setIsOnline] = useState<boolean>();
   const sendMessage = useMutation(api.matches.sendMessage);
   const matchee = useQuery(api.user.getSingleUser, {
     userId: obj?.matcheeId,
   });
-  console.log(matchee)
-  useEffect(() => { 
-    setIsOnline(isUserOnline(user.lastSeenOn))
-  }, [user])
+
   
   useEffect(() => {
     setTimeout(() => {

@@ -1,30 +1,19 @@
 "use client"
-import { useEffect } from "react";
-import { api } from "@/convex/_generated/api";
-import { useMutation } from "convex/react";
-import useStoreUserEffect from "@/hooks/useStoreUser";
-import { Id } from "@/convex/_generated/dataModel";
-
+import { createTheme, ThemeProvider } from "@mui/material";
+import CssBaseline from "@mui/material/CssBaseline";
 const GlobalProvider = (props: React.PropsWithChildren) => {
-  const updateUserProfileMutation = useMutation(api.user.updateUserProfile);
-  const userId = useStoreUserEffect();
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
 
-  // useEffect(() => {
-  //   if (userId) {
-  //     const updateLastSeenOn = () => {
-  //       updateUserProfileMutation({
-  //         id: userId as Id<"user">,
-  //         userData: {
-  //           lastSeenOn: Math.floor(Date.now() / 1000),
-  //         },
-  //       });
-  //     };
-  //     const intervalId = setInterval(updateLastSeenOn, 10000);
-  //     return () => clearInterval(intervalId);
-  //   }
-  // }, [userId, updateUserProfileMutation]);
-
-  return props.children;
+  return (
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      {props.children}
+    </ThemeProvider>
+  );
 };
 
 export default GlobalProvider;
