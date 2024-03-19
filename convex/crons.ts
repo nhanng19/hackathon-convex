@@ -5,7 +5,7 @@ const crons = cronJobs();
 
 crons.interval(
   "log users",
-  { seconds: 60 }, // every minute
+  { minutes: 10 }, // every hour
   internal.matches.pushMatches
 );
 
