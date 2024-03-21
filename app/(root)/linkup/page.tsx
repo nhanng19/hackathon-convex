@@ -71,26 +71,11 @@ export default function LinkUp() {
       <div className="w-full h-full">
         <div className="flex-col md:flex-row relative flex h-full w-full items-center justify-center overflow-hidden text-textGrey">
           <div className="flex-none md:flex-1 flex justify-center items-center shadow-2xl z-20 w-full h-full">
-            <AnimatePresence>
-              {restaurants?.length ? (
-                restaurants.map((card, indx) => (
-                  <Card
-                    key={card.alias}
-                    data={card}
-                    active={indx === activeIndex}
-                    removeCard={removeCard}
-                    handleAddRestaurant={handleAddRestaurant}
-                  />
-                ))
-              ) : (
-                <div className="flex flex-col gap-4 min-w-40">
-                    <Skeleton variant="text" sx={{ fontSize: "1rem", width: "100%" }} />
-                  <Skeleton variant="circular" width={40} height={40} />
-                  <Skeleton variant="rectangular" className="w-full"/>
-                  <Skeleton variant="rounded" width={210} height={60} />
+                <div className="flex flex-col gap-4 max-w-[26rem]">
+                  <Skeleton variant="circular" className="w-full" />
+                  <Skeleton variant="rectangular" className="w-full" />
+                  <Skeleton variant="rounded" className="w-full" />
                 </div>
-              )}
-            </AnimatePresence>
           </div>
           <MapComponent
             defaultZoom={12}

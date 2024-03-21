@@ -45,7 +45,6 @@ export const determineMatches = internalMutation({
 export const updateMatch = internalMutation({
   args: { id: v.any(), pair: v.any() },
   async handler(ctx, args) {
-    console.log(args)
     const { id, pair } = args;
     return await ctx.db.patch(id, { pair });
   },

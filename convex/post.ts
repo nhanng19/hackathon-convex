@@ -5,7 +5,6 @@ export const getAllPosts = query({
   args: {},
   handler: async (ctx) => {
       const posts = await ctx.db.query("post").order("asc").take(100);
-      console.log(posts)
     return posts.reverse();
   },
 });

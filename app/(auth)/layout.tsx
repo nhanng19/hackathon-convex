@@ -14,11 +14,13 @@ export default function RootLayout({
   return (
     <ConvexClientProvider>
       <html lang="en" suppressHydrationWarning={true}>
-        <body
-          suppressHydrationWarning={true}
-          style={{background: "black"}}
-        >
-          <Toaster richColors />
+        <body suppressHydrationWarning={true} style={{ background: "black" }}>
+          <Toaster
+            richColors
+            closeButton
+            theme="dark"
+            position="top-center"
+          />
           <div className="h-screen flex flex-col justify-center items-center">
             {children}
           </div>

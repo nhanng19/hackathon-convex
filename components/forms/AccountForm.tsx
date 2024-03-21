@@ -27,7 +27,7 @@ import useLocation from "@/hooks/useLocation";
 import { Textarea } from "../ui/textarea";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-
+import { toast } from "sonner";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
@@ -76,6 +76,14 @@ export default function AccountForm({ user, title, subtitle }: Props) {
   });
 
   const onSubmit = async (values: z.infer<typeof UserValidation>) => {
+    if (!location) {
+      return toast.error(
+        <div>
+          <img src="https://www.wikihow.com/images/thumb/5/52/Enable-Location-Services-on-Google-Chrome-Step-7-Version-4.jpg/v4-460px-Enable-Location-Services-on-Google-Chrome-Step-7-Version-4.jpg" />
+          <p className="mt-4">✨ Please enable location to continue 🙏</p>
+        </div>
+      );
+    }
     updateUserProfile({
       id: userId as Id<"user">,
       userData: {
@@ -194,7 +202,6 @@ export default function AccountForm({ user, title, subtitle }: Props) {
                         )}
                         sx={{
                           width: "500px",
-  
                         }}
                       />
                     </FormItem>

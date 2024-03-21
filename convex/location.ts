@@ -20,7 +20,6 @@ const getCity = async ({
           const compound_code = data.plus_code.compound_code.split(' ');
           compound_code.shift();
           const city = compound_code.join(' ');
-          console.log(city)
           return city;
     } catch (error: any) {
         return error;
