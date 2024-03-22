@@ -46,7 +46,7 @@ const Card = ({ data, active, removeCard, handleAddRestaurant }: CardProps) => {
           transition={{ type: "tween", duration: 0.3, ease: "easeIn" }}
           whileDrag={{ cursor: "grabbing" }}
           exit={{ x: exitX }}
-          className="cursor-grab absolute flex  max-h-[80%] flex-col rounded-xl bg-gray-900 bg-clip-border text-light-1 shadow-2xl self-center items-center justify-center"
+          className="cursor-grab absolute flex  w-full max-w-[26rem] flex-col rounded-xl bg-gray-900 bg-clip-border text-light-1 shadow-2xl self-center items-center justify-center"
         >
           <div className="relative overflow-hidden text-white shadow-lg rounded-xl bg-blue-gray-500 bg-clip-border shadow-blue-gray-500/40 w-full h-[268px]">
             <img
