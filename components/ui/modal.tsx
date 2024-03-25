@@ -31,7 +31,6 @@ export default function Reviews(props: any) {
         const data = await fetchReviews({
           alias: alias,
         });
-        console.log(data);
         setReviews(data.reviews);
       };
       handleFetchReviews();

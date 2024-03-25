@@ -11,7 +11,6 @@ import Image from "next/image";
 
 const Search = () => {
   const usersData = useQuery(api.user.getAllUsers);
-  console.log(usersData);
   const [users, setUsers] = useState<any>([]);
   const [filter, setFilter] = useState<string>("");
 
